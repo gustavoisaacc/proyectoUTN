@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "administracion y gestion de una empresa y pedidos ",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "npm run dev"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
