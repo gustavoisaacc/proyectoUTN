@@ -1,0 +1,36 @@
+{
+  "name": "administracion",
+  "version": "1.0.0",
+  "description": "administracion y gestion de una empresa y pedidos ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gustavoisaacc/proyectoUTN.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongoDB",
+    "react",
+    "tailwind"
+  ],
+  "author": "chaile gustavo herrera melina morua lucia racedo sebastian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavoisaacc/proyectoUTN/issues"
+  },
+  "homepage": "https://github.com/gustavoisaacc/proyectoUTN#readme",
+  "dependencies": {
+    "bcrypt": "5.1.1",
+    "cookie-parser": "1.4.6",
+    "cors": "2.8.5",
+    "express": "4.19.2",
+    "express-promise-router": "4.1.1",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "8.4.0",
+    "zod": "3.23.8"
+  }
+}
