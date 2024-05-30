@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon src/app.js",
     "start": "node index.js"
   },
   "repository": {
@@ -36,7 +36,8 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^3.1.2"
+    "dotenv": "16.4.5",
+    "morgan": "1.10.0",
+    "nodemon": "3.1.2"
   }
 }

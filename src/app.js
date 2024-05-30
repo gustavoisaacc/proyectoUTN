@@ -2,12 +2,20 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
+import { PORT } from "./config/config.js";
+import { routeUser } from "./routes/user.routes.js";
+import { connectDB } from "./config/db.js";
+import { config } from "dotenv";
+
 export const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
+config();
+
 // Routes
+app.use("/api/v1/users", routeUser);
 
 // Error handling
 app.use((err, req, res, next) => {
@@ -16,3 +24,9 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+connectDB();
