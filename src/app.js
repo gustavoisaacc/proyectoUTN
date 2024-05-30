@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { routeUser } from "./routes/user.routes.js";
+import { routeRole } from "./routes/role.routes.js";
 import { connectDB } from "./config/db.js";
 import { config } from "dotenv";
 
@@ -16,6 +17,7 @@ connectDB();
 
 // Routes
 app.use("/api/v1/users", routeUser);
+app.use("/api/v1/auth", routeRole);
 
 // Error handling
 app.use((err, req, res, next) => {
