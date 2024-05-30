@@ -19,8 +19,13 @@ app.use("/api/v1/users", routeUser);
 
 // Error handling
 app.use((err, req, res, next) => {
-  res.status(500).json({
-    status: "error",
-    message: err.message,
-  });
+  if (err.code === 11000) {
+    res.status(401).json({
+      message: "Duplicate value entered for the field",
+    });
+  } else {
+    res.status(err.status || 500).json({
+      message: err.message || "Something went wrong",
+    });
+  }
 });
