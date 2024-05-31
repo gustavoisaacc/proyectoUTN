@@ -1,14 +1,14 @@
-import { User } from "../models/user.model.js";
+import { Users } from "../models/user.model.js";
 
 export const create = async (req, res) => {
   const data = req.body;
-  const newUser = new User(data);
+  const newUser = new Users(data);
   await newUser.save();
   res.status(201).json({ msg: "usuario creado", newUser });
 };
 
 export const findAll = async (req, res) => {
-  const user = await User.find();
+  const user = await Users.find();
   res.status(200).json(user);
 };
 
@@ -23,7 +23,7 @@ export const update = async (req, res) => {
   const data = req.body;
 
   //verificar si existe el usuario
-  const findUser = await User.findById(id);
+  const findUser = await Users.findById(id);
 
   if (!findUser) {
     const error = new Error("User not found");
@@ -39,7 +39,7 @@ export const update = async (req, res) => {
 
 export const deletee = async (req, res) => {
   const { id } = req.params;
-  const findUser = await User.findById(id);
+  const findUser = await Users.findById(id);
 
   if (!findUser) {
     const error = new Error("User not found");
