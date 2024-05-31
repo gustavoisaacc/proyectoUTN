@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import { PORT } from "./config/config.js";
 import { routeUser } from "./routes/user.routes.js";
+import { routeRole } from "./routes/role.routes.js";
 import { connectDB } from "./config/db.js";
 import { config } from "dotenv";
 
@@ -13,20 +13,21 @@ app.use(cors());
 app.use(morgan("dev"));
 
 config();
+connectDB();
 
 // Routes
 app.use("/api/v1/users", routeUser);
+app.use("/api/v1/auth", routeRole);
 
 // Error handling
 app.use((err, req, res, next) => {
-  res.status(500).json({
-    status: "error",
-    message: err.message,
-  });
+  if (err.code === 11000) {
+    res.status(401).json({
+      message: "Duplicate value entered for the field",
+    });
+  } else {
+    res.status(err.status || 500).json({
+      message: err.message || "Something went wrong",
+    });
+  }
 });
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-connectDB();
