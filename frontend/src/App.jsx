@@ -1,3 +1,13 @@
+
+import CardHeders from "./components/cardHeders";
+
+function App() {
+  return (
+    <>
+      <CardHeders />
+    </>
+
+
 import Button from "./Button";
 
 function App() {
@@ -7,6 +17,7 @@ function App() {
       <Button name="enviar" className="bg-primary text-white"/>
       <Button name="comprar" className="bg-red-500 text-white"/>
     </div>
+
   );
 }
 
