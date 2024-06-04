@@ -1,14 +1,14 @@
-import { User } from "../models/user.model.js";
+import { Users } from "../models/user.model.js";
 
 export const create = async (req, res) => {
   const data = req.body;
-  const newUser = new User(data);
+  const newUser = new Users(data);
   await newUser.save();
   res.status(201).json({ msg: "usuario creado", newUser });
 };
 
 export const findAll = async (req, res) => {
-  const user = await User.find();
+  const user = await Users.find();
   res.status(200).json(user);
 };
 
@@ -21,15 +21,32 @@ export const findById = (req, res) => {
 export const update = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  const findUser = await User.findById(id);
+
+  //verificar si existe el usuario
+  const findUser = await Users.findById(id);
 
   if (!findUser) {
-    console.log("no existe el usuario");
+    const error = new Error("User not found");
+    res.status(404).json({ msg: error.message });
   }
 
-  console.log(data);
+  findUser.name = data.name || findUser.name;
+  findUser.password = data.password || findUser.password;
+
+  await findUser.save();
+  res.status(200).json({ msg: "user updated successfully", findUser });
 };
 
-export const deletee = (req, res) => {
-  console.log("eliminar usuario por id");
+export const deletee = async (req, res) => {
+  const { id } = req.params;
+  const findUser = await Users.findById(id);
+
+  if (!findUser) {
+    const error = new Error("User not found");
+    res.status(404).json({ msg: error.message });
+  }
+
+  await findUser.deleteOne();
+
+  res.status(200).json({ msg: "user deleted successfully" });
 };
