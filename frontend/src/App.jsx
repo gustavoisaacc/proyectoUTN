@@ -1,8 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./layout/Layout";
+import HomePage from "./pages/HomePage";
+
 function App() {
   return (
-    <div className="bg-black min-h-screen grid place-content-center">
-      <h1 className="text-white">Hello, world!</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
