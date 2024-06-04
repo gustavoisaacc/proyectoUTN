@@ -1,15 +1,16 @@
 import Button from "../components/ui/ButtonLucia";
 import CardHeders from "../components/cardHeders";
-import { Link } from "react-router-dom";
-import Card from "../components/Card";
+
+import { products } from "../utils/mockup";
+import CardList from "../components/CardList";
 
 function HomePage() {
   return (
     <div>
-      <div className="bg-secundary w-screen h-full p-10">
-        <header className="flex flex-col items-center gap-5 lg:flex-row justify-between">
+      <div className="bg-secundary w-full h-full">
+        <header className="flex flex-col items-center  lg:flex-row justify-between p-10">
           <CardHeders
-            className="text-white w-[300px] md:w-[500px] m-0"
+            className="text-white w-full md:justify-start"
             title="Descubre el Arte de la Gastronomía"
             description="Explora nuestros productos premium y aprende sobre el fascinante mundo de la gastronomía"
           >
@@ -19,7 +20,7 @@ function HomePage() {
             </div>
           </CardHeders>
           <section>
-            <div className="border h-[200px] w-[600px] bg-slate-400"></div>
+            <div className=" border h-[200px] w-[650px] bg-slate-400 "></div>
           </section>
         </header>
       </div>
@@ -30,10 +31,10 @@ function HomePage() {
             title="Descubre el Arte de la Gastronomía"
             description="Explora nuestros productos premium y aprende sobre el fascinante mundo de la gastronomía"
           />
-          <div className="flex gap-10 mt-10">
-            <Card />
-            <Card />
-            <Card />
+          <div className="flex gap-5 mt-10 ">
+            {products.map((items) => {
+              return <CardList key={items.id} items={items} />;
+            })}
           </div>
         </section>
       </main>
