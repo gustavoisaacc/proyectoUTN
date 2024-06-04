@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import Navbar from "./components/navbar";
-
-function App() {
-  return (
-    <>
-    <Navbar/>
-    </>
-
-=======
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
 import HomePage from "./pages/HomePage";
@@ -23,7 +13,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
->>>>>>> 2ff7f225e173ab53b657b810561c4baf35668eba
+
   );
 }
 

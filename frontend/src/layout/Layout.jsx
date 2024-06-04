@@ -1,21 +1,20 @@
 import { Outlet } from "react-router-dom";
+import Footer from "../components/footer";
+import CardHeders from "../components/cardHeders";
+
 
 function Layout() {
   return (
     <div className="w-screen h-screen grid grid-cols-layout grid-rows-[auto,1fr,auto] ">
       <header className="bg-primary row-span-1">
-        <h1 className="text-center text-4xl font-bold text-gray-100">
-          Hola Mundo
-        </h1>
+        <CardHeders/>
       </header>
       <main className="">
         <Outlet />
       </main>
-      <footer className="bg-primary row-span-1">
-        <h1 className="text-center text-4xl font-bold text-gray-100">
-          Hola Mundo
-        </h1>
-      </footer>
+      <div className="bg-primary row-span-1">
+        <Footer/>
+      </div>
     </div>
   );
 }
