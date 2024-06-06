@@ -1,6 +1,6 @@
-function Li({ children }) {
+function Li({ children, className }) {
   return (
-    <li className="grid grid-cols-4 gap-2 justify-between border-b-2 py-5">
+    <li className={`grid ${className} gap-2 justify-between border-b-2 py-5`}>
       {children}
     </li>
   );

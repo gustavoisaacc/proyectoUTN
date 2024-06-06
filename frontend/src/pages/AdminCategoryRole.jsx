@@ -1,5 +1,9 @@
 function AdminCategoryRole() {
-  return <div>AdminCategoryRole</div>;
+  return (
+    <div>
+      <h1>a</h1>
+    </div>
+  );
 }
 
 export default AdminCategoryRole;

@@ -18,7 +18,7 @@ function OrderList() {
             order.map((order) => {
               return (
                 <>
-                  <Li>
+                  <Li className="grid-cols-4">
                     <span>{order.orderId}</span>
                     <span>{order.name}</span>
                     <span>{order.price}</span>
