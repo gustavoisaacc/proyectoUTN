@@ -5,7 +5,7 @@ function CardList({ items }) {
   console.log(image);
 
   return (
-    <div className="grid place-content-center m-auto">
+    <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 gap-5">
       <Card
         title={title}
         description={description}

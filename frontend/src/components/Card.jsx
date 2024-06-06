@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import image2 from "../assets/react.svg";
 
 function Card({ title, description, price, image }) {
   console.log(image);
