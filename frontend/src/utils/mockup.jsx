@@ -32,4 +32,50 @@ export const products = [
     image:
       "https://cdn.pixabay.com/photo/2017/06/29/20/16/food-2456100_1280.jpg",
   },
+  {
+    id: 4,
+    title: "Product 3",
+    description:
+      "lorem ipsum dolor sit amet, consectetur adip, lorem ipsum dolor, lorem ",
+    status: true,
+    category: "category 3",
+    price: 300,
+    image:
+      "https://cdn.pixabay.com/photo/2017/06/29/20/16/food-2456100_1280.jpg",
+  },
+];
+
+export const comment = [
+  {
+    id: 1,
+    name: "valentina ",
+    comment: "excelente atencion",
+    votes: 7.5,
+  },
+  {
+    id: 1,
+    name: "sofia",
+    comment: "excelente atencion",
+    votes: 7.5,
+  },
+];
+
+export const order = [
+  {
+    orderId: 101,
+
+    price: 100,
+    status: "pending",
+  },
+  {
+    orderId: 101,
+    price: 100,
+    status: "pending",
+  },
+  {
+    orderId: 101,
+    name: "hola",
+    price: 100,
+    status: "pending",
+  },
 ];
