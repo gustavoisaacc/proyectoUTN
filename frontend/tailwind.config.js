@@ -16,15 +16,18 @@ export default {
         white: "#FFFFFF",
         secundary: "#E3891D",
         secundaryLigth: "#429EBD",
-
+       
         information: "#007CFF",
         warning: "#D4AF37",
         error: "#E63E33",
         success: "#7BA05B",
       },
+        
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
+        letters: ["Six Caps", "Barlow Condensed"]
       },
+      
     },
   },
   plugins: [],
