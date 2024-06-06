@@ -1,13 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import { products } from "../../utils/mockup";
-import Li from "../ui/Li";
+import AddTaskModal from "./AddTaskModel";
 import Product from "./Product";
+import Li from "../ui/Li";
 
 function ListProduct() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex justify-between mb-10">
         <h1 className="text-secundary font-semibold text-4xl">Productos</h1>
-        <button className="bg-secundary text-white rounded-lg px-5 py-2">
+        <button
+          onClick={() => navigate("?newproduct=true")}
+          className="bg-secundary text-white rounded-lg px-5 py-2"
+        >
           Nuevo Producto
         </button>
       </div>
@@ -23,6 +30,7 @@ function ListProduct() {
           return <Product key={indx} item={item} />;
         })}
       </ul>
+      <AddTaskModal />
     </>
   );
 }
