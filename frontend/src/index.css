@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.image{
+  height: 100vh;
+  width: 100vw;
+  background: url("./assets/hamburmundo.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.imagecenter{
+  height: 25vh;
+  width: 25vh;
+  background-image: url("./assets/patata.png");
+  
+
+}
+  

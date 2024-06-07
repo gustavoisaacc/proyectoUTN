@@ -9,22 +9,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FF9800",
-        primaryLigth: "#F7AD19",
-        primaryDarck: "#E3891D",
+        primary: "#053F5C",
+        primaryLigth: "#429EBD",
+
         black: "#333333",
         white: "#FFFFFF",
-        secundary: "#053F5C",
+        secundary: "#E3891D",
         secundaryLigth: "#429EBD",
+  
+        secundaryDark: "#E3891D",
 
         information: "#007CFF",
         warning: "#D4AF37",
         error: "#E63E33",
         success: "#7BA05B",
       },
+        
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
+        letters: ["Six Caps", "Barlow Condensed"]
       },
+      
     },
   },
   plugins: [],

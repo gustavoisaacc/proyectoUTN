@@ -1,13 +1,27 @@
-import Button from "./components/ui/ButtonMel";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./layout/Layout";
+import HomePage from "./pages/HomePage";
+
+import DashoardPage from "./pages/DashoardPage";
+import DashboarLayout from "./layout/DashboarLayout";
+import ProducPage from "./pages/ProducPage";
+import NotFound from "./pages/NotFound";
+
 
 function App() {
   return (
-    <div className="bg-black min-h-screen grid place-content-center">
-      <h1 className="text-white">Hello, world!</h1>
-     
-     
-    </div>
-
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+        <Route element={<DashboarLayout />}>
+          <Route path="/dashboard" element={<DashoardPage />} />
+          <Route path="/products" element={<ProducPage />} />
+        </Route>
+          <Route path="*" element={<NotFound/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
