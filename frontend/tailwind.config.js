@@ -15,6 +15,8 @@ export default {
         black: "#333333",
         white: "#FFFFFF",
         secundary: "#E3891D",
+        secundaryLigth: "#429EBD",
+  
         secundaryDark: "#E3891D",
 
         information: "#007CFF",
@@ -22,9 +24,12 @@ export default {
         error: "#E63E33",
         success: "#7BA05B",
       },
+        
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
+        letters: ["Six Caps", "Barlow Condensed"]
       },
+      
     },
   },
   plugins: [],

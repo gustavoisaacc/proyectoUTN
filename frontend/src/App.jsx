@@ -6,6 +6,10 @@ import DashboarLayout from "./layout/DashboarLayout";
 import ProducPage from "./pages/ProducPage";
 import CreateRolCategory from "./components/createRol";
 import AdminCategoryRole from "./pages/AdminCategoryRole";
+import DashoardPage from "./pages/DashoardPage";
+import DashboarLayout from "./layout/DashboarLayout";
+import ProducPage from "./pages/ProducPage";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -21,7 +25,7 @@ function App() {
           <Route path="/AdministrarRoles" element={<AdminCategoryRole />} />
 
         </Route>
-        <Route path="*" element={<h1>not found</h1>} />
+          <Route path="*" element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   );
