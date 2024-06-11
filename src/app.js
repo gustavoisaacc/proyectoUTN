@@ -9,6 +9,7 @@ import { routerProduct } from "./routes/product.routes.js";
 
 import { config } from "dotenv";
 import { connectDB } from "./config/db.js";
+import { createCategories, createRoles } from "./utils/initialState.js";
 export const app = express();
 app.use(express.json());
 app.use(cors());
@@ -16,6 +17,8 @@ app.use(morgan("dev"));
 
 config();
 connectDB();
+createRoles();
+createCategories();
 
 // Routes
 app.use("/api/v1/users", routeUser);
