@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  role: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Roles",
+    },
+  ],
 });
 
 export const Users = mongoose.model("Users", userSchema);

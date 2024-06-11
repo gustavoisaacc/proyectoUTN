@@ -3,7 +3,7 @@ import * as categoryController from "../controllers/categoy.controller.js";
 
 export const routeCategory = Router();
 
-routeCategory.post("/new-category", categoryController.create);
+routeCategory.post("/", categoryController.create);
 
 routeCategory.get("/", categoryController.findAll);
 
