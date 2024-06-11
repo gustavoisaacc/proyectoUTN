@@ -5,6 +5,7 @@ import { comment, products } from "../utils/mockup";
 import CardList from "../components/CardList";
 import Comment from "../components/Comment";
 
+import Carousel from "../components/carousel/Carousel";
 function HomePage() {
   return (
     <div>
@@ -21,7 +22,9 @@ function HomePage() {
             </div>
           </CardHeders>
           <section>
-            <div className=" border h-[200px] w-[650px] bg-slate-400 "></div>
+            <div className=" max-w-lg">
+              <Carousel />
+            </div>
           </section>
         </header>
       </div>

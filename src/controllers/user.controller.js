@@ -1,8 +1,21 @@
+import { Roles } from "../models/role.model.js";
 import { Users } from "../models/user.model.js";
+import { hash } from "../utils/encryptPassword.js";
 
-export const create = async (req, res) => {
+export const create = async (req, res, next) => {
   const data = req.body;
   const newUser = new Users(data);
+  newUser.password = await hash(data.password);
+  try {
+    if (data.role) {
+      const foundRole = await Roles.findOne({ name: { $in: data.role } });
+      if (!foundRole)
+        return res.status(400).json({ message: "role not found" });
+      newUser.role = Array(foundRole).map((role) => role._id);
+    }
+  } catch (error) {
+    next(error);
+  }
   await newUser.save();
   res.status(201).json({ msg: "usuario creado", newUser });
 };

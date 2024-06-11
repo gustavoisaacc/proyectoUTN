@@ -1,10 +1,12 @@
 import Router from "express-promise-router";
 import * as userController from "../controllers/user.controller.js";
+import { validateData } from "../middleware/validate.middleware.js";
+import { userSchema } from "../schemas/schema.js";
 
 export const routeUser = Router();
 
 //routes
-routeUser.post("/new-user", userController.create);
+routeUser.post("/", validateData(userSchema), userController.create);
 
 routeUser.get("/", userController.findAll);
 
