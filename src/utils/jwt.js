@@ -1,11 +1,18 @@
 import jwt from "jsonwebtoken";
 import { SECURITY_KEY } from "../config/config.js";
 
-export const createToken = async (payload) => {
+export const createAccessToken = async (id) => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, SECURITY_KEY, (err, token) => {
-      if (err) reject(err);
-      resolve(token);
-    });
+    jwt.sign(
+      id,
+      SECURITY_KEY,
+      {
+        expiresIn: "1d",
+      },
+      (err, token) => {
+        if (err) reject(err);
+        resolve(token);
+      }
+    );
   });
 };
