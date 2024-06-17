@@ -1,7 +1,7 @@
 import express from "express";
-import cors from "cors";
 import morgan from "morgan";
-import cookies from "cookie-parser";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 import { routeUser } from "./routes/user.routes.js";
 import { routeRole } from "./routes/role.routes.js";
@@ -14,10 +14,15 @@ import { connectDB } from "./config/db.js";
 import { createCategories, createRoles } from "./utils/initialState.js";
 
 export const app = express();
-app.use(express.json());
-app.use(cors());
 app.use(morgan("dev"));
-app.use(cookies());
+const secretKey = "yourSecretKey";
+
+// Configura cookie-parser middleware
+app.use(cookieParser(secretKey));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 config();
 connectDB();
@@ -25,11 +30,11 @@ createRoles();
 createCategories();
 
 // Routes
-app.use("/api/v1/admin", authRoute);
 app.use("/api/v1/users", routeUser);
 app.use("/api/v1/role", routeRole);
 app.use("/api/v1/product", routerProduct);
 app.use("/api/v1/category", routeCategory);
+app.use("/api/v1/", authRoute);
 
 // Error handling
 app.use((err, req, res, next) => {

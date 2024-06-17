@@ -1,6 +1,6 @@
 import { Users } from "../models/user.model.js";
 import { compare } from "../utils/encryptPassword.js";
-import { createToken } from "../utils/jwt.js";
+import { createAccessToken } from "../utils/jwt.js";
 
 export const sigin = async (req, res) => {
   const { name, password } = req.body;
@@ -18,16 +18,16 @@ export const sigin = async (req, res) => {
     res.status(401).json({ msg: error.message });
   }
 
-  const token = await createToken({ payload: user._id });
+  const token = await createAccessToken({ id: user._id });
 
-  req.cookie("accessToken", token, {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    // httpOnly: true,
-    // secure: true,
+  res.cookie("token", token, {
+    //httpOnly: true,
     sameSite: "none",
+    //secure: true,
+    maxAge: 24 * 60 * 60 * 100, //1 day
   });
 
-  res.status(200).json({ msg: "login", token });
+  res.json({ message: "Logged in", token });
 };
 
 export const signOut = (req, res) => {
