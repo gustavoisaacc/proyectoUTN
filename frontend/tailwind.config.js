@@ -1,3 +1,5 @@
+import { text } from 'express';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -8,7 +10,8 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      
+        colors: {
         primary: "#053F5C",
         primaryLigth: "#429EBD",
 
@@ -30,7 +33,11 @@ export default {
         letters: ["Six Caps", "Barlow Condensed"]
       },
       
+      
     },
   },
   plugins: [],
+  
 };
+
+
