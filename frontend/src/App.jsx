@@ -4,12 +4,9 @@ import HomePage from "./pages/HomePage";
 import DashoardPage from "./pages/DashoardPage";
 import DashboarLayout from "./layout/DashboarLayout";
 import ProducPage from "./pages/ProducPage";
-import CreateRolCategory from "./components/createRol";
 import AdminCategoryRole from "./pages/AdminCategoryRole";
-import DashoardPage from "./pages/DashoardPage";
-import DashboarLayout from "./layout/DashboarLayout";
-import ProducPage from "./pages/ProducPage";
 import NotFound from "./pages/NotFound";
+import MenuLista from "./pages/Menu";
 
 
 function App() {
@@ -23,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<DashoardPage />} />
           <Route path="/products" element={<ProducPage />} />
           <Route path="/AdministrarRoles" element={<AdminCategoryRole />} />
+          <Route path="/Menu" element={<MenuLista/>} />
 
         </Route>
           <Route path="*" element={<NotFound/>}/>
