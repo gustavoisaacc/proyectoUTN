@@ -1,6 +1,5 @@
 import propTypes from 'prop-types';
 
-
 const ButtonMel = ({title, disabled}) => {
   return (
     <button 
