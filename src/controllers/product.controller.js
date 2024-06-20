@@ -18,6 +18,12 @@ export const findOne = async (req, res) => {
   res.status(200).json(product);
 };
 
+export const findFilter = async (req, res) => {
+  const { name } = req.query;
+  const products = await Products.find({ name });
+  res.status(200).json(products);
+};
+
 export const update = async (req, res) => {
   const { id } = req.params;
   const data = req.body;

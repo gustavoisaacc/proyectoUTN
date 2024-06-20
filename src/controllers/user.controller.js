@@ -21,7 +21,7 @@ export const create = async (req, res, next) => {
 };
 
 export const findAll = async (req, res) => {
-  const user = await Users.find();
+  const user = await Users.find().populate("role");
   res.status(200).json(user);
 };
 

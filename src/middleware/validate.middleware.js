@@ -23,32 +23,29 @@ export const validateData = (schema) => (req, res, next) => {
   return;
 };
 
-export const validateJWT = (req, res) => {
-  const token = req.cookies.accessToken;
-  console.log(token);
+export const isAuth = (req, res, next) => {
+  const token = req.cookies.token;
   if (!token) {
-    return res.status(401).json({ msg: "authorization denied4" });
+    return res.status(401).json({ message: "authorization denied" });
   }
+  // TODO: Verify token
 
-  jwt.verify(token, SECURITY_KEY, (err, user) => {
+  jwt.verify(token, SECURITY_KEY, async (err, decoded) => {
     if (err) {
-      return res.status(401).json({ msg: "authorization denied3" });
+      return res.status(401).json({ message: "Invalid credential" });
     }
-
-    req.user = user.id;
+    req.userId = decoded.id;
     next();
   });
 };
 
 export const superadmin = async (req, res, next) => {
-  const { id } = req.user;
-  const user = await Users.findById(id);
-  if (!user) {
-    return res.status(401).json({ msg: "authorization denied1" });
-  }
-  const role = await Roles.findById({ _id: { $in: user.role } });
+  console.log("admin");
+  console.log(req.userId);
+  const user = await Users.findById(req.userId);
+  const role = await Roles.findById(user.role);
   if (role.name !== "superadmin") {
-    return res.status(401).json({ msg: "authorization denied2" });
+    return res.status(401).json({ message: "authorization denied" });
   }
   next();
 };
