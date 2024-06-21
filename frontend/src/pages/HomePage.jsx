@@ -10,15 +10,23 @@ function HomePage() {
   return (
     <div>
       <div className="bg-secundary w-full h-full">
-        <header className="flex flex-col items-center  lg:flex-row justify-between gap-5 p-10">
+        <header className="flex flex-col items-center  lg:flex-row justify-between gap-5 p-5 w-[95%] m-auto">
           <CardHeders
             className="text-center text-white w-full lg:justify-start lg:text-left"
             title="Descubre el Arte de la Gastronomía"
             description="Explora nuestros productos premium y aprende sobre el fascinante mundo de la gastronomía"
           >
             <div className="mt-5 flex justify-between gap-5 ">
-              <Button name="Pedidos" className="bg-primary text-white" />
-              <Button name="ver mas" className=" text-slate-400 bg-white" />
+              <Button
+                path="/menu"
+                name="Pedidos"
+                className="bg-primary text-white text-center"
+              />
+              <Button
+                path="about"
+                name="ver mas"
+                className=" text-slate-400 bg-white text-center"
+              />
             </div>
           </CardHeders>
           <section>

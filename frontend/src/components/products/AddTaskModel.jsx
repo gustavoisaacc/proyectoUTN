@@ -8,16 +8,15 @@ import {
 } from "@headlessui/react";
 
 import TaskForm from "./TaskForm";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AddTaskModal() {
   // //obteniendo si el modal esite
-  // const navitage = useNavigate();
-  const location = useNavigate();
+  const navitage = useNavigate();
+  const location = useLocation();
   const queyParam = new URLSearchParams(location.search);
-  const queryTask = queyParam.get("newproduct");
-  const show = queryTask ? true : false;
-
+  const query = queyParam.get("newproduct");
+  const show = query ? true : false;
   // //obteniendo id de los proyectos
   // const params = useParams();
   // const projectId = params.projectId!;
@@ -55,7 +54,6 @@ export default function AddTaskModal() {
   //   };
   //   mutate(data);
   // });
-  let [isOpen, setIsOpen] = useState(true);
   return (
     <>
       <Transition appear show={show} as={Fragment}>
@@ -63,7 +61,7 @@ export default function AddTaskModal() {
           as="div"
           className="relative z-10"
           open={show}
-          onClose={() => setIsOpen(false)}
+          onClose={() => navitage(location.pathname)}
         >
           <TransitionChild
             as={Fragment}
