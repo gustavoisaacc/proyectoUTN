@@ -8,7 +8,6 @@ import AdminCategoryRole from "./pages/AdminCategoryRole";
 import NotFound from "./pages/NotFound";
 import MenuLista from "./pages/Menu";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -23,7 +22,7 @@ function App() {
           <Route path="/Menu" element={<MenuLista/>} />
 
         </Route>
-          <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

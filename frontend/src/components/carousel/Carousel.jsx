@@ -10,7 +10,11 @@ function Carousel() {
           {images.map((item) => {
             return (
               <>
-                <img src={`public/images/${item}.jpg`} alt="" />
+                <img
+                  src={`public/images/${item}.jpg`}
+                  alt="Product 1"
+                  className="object-cover bg-no-repeat	w-full"
+                />
               </>
             );
           })}
