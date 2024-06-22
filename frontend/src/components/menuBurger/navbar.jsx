@@ -1,22 +1,39 @@
 import { useState } from "react";
 import "../menuBurger/menuBurger.css";
-import { navegacion } from "../../utils/navegacion";
+import { PROTECTEDROUTES, navegacion } from "../../utils/navegacion";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/useAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuth, signout } = useAuth();
 
   return (
     <div className="nadvar text-white p-5 w-[95%] m-auto">
       <div className="nav-logo">coode</div>
       <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
-        {navegacion.map((item) => {
-          return (
-            <Link to={item.path} key={item.id}>
-              {item.name}
-            </Link>
-          );
-        })}
+        {!isAuth ? (
+          navegacion.map((item) => {
+            return (
+              <Link to={item.path} key={item.id}>
+                {item.name}
+              </Link>
+            );
+          })
+        ) : (
+          <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
+            {PROTECTEDROUTES.map((item) => {
+              return (
+                <>
+                  <Link to={item.path} key={item.id}>
+                    {item.name}
+                  </Link>
+                </>
+              );
+            })}
+            <button onClick={() => signout()}>logout</button>
+          </div>
+        )}
       </div>
       <div
         className={`nav-toggle ${isOpen && "open"}`}

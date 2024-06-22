@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import { routeUser } from "./routes/user.routes.js";
 import { routeRole } from "./routes/role.routes.js";
@@ -19,6 +20,12 @@ const secretKey = "yourSecretKey";
 
 // Configura cookie-parser middleware
 app.use(cookieParser(secretKey));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -3,7 +3,7 @@ import { Categories } from "../models/categoy.model.js";
 export const create = async (req, res) => {
   const data = req.body;
   const newCategory = new Categories(data);
-  newCategory.save();
+  await newCategory.save();
   res.status(201).json({ msg: "Category create successfully ", newCategory });
 };
 
@@ -15,6 +15,7 @@ export const findAll = async (req, res) => {
 export const findOne = async (req, res) => {
   const { id } = req.params;
   const category = await Categories.findById(id);
+
   res.status(200).json(category);
 };
 

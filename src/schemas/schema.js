@@ -9,3 +9,15 @@ export const userSchema = z.object({
 export const roleSchema = z.object({
   name: z.string().min(4),
 });
+
+export const categorySchema = z.object({
+  name: z.string().min(4),
+});
+
+export const productSchema = z.object({
+  name: z.string().min(4),
+  price: z.number(),
+  category: z.string(),
+  description: z.string(),
+  image: z.string(),
+});

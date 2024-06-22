@@ -15,3 +15,21 @@ export const navegacion = [
     name: "Menu",
   },
 ];
+
+export const PROTECTEDROUTES = [
+  {
+    id: 1,
+    path: "/dashboard",
+    name: "Administracion",
+  },
+  {
+    id: 2,
+    path: "/products",
+    name: "Productis",
+  },
+  {
+    id: 3,
+    path: "/roles-category",
+    name: "roles y categorias",
+  },
+];

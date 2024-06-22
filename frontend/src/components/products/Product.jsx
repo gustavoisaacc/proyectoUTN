@@ -2,13 +2,13 @@ import React from "react";
 import Li from "../ui/Li";
 
 function Product({ item }) {
+  console.log(item);
   return (
     <Li className="grid-cols-5 px-5">
-      <span>{item.image}</span>
-      <span>name</span>
-      <span>{item.category}</span>
+      <span>imagen</span>
       <span>{item.name}</span>
-      <span>{item.image}</span>
+      <span>{item.category.map((item) => item.name)}</span>
+      <span>{item.price}</span>
     </Li>
   );
 }

@@ -27,7 +27,7 @@ export const findAll = async (req, res) => {
 
 export const findById = (req, res) => {
   const { id } = req.params;
-  const user = User.findById(id);
+  const user = Users.findById(id);
   res.status(200).json(user);
 };
 

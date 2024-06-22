@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { products } from "../../utils/mockup";
 import AddTaskModal from "./AddTaskModel";
 import Product from "./Product";
 import Li from "../ui/Li";
+import { useProduct } from "../../context/useAuth";
 
 function ListProduct() {
+  const { products } = useProduct();
   const navigate = useNavigate();
-
+  console.log(products);
   return (
     <>
       <div className="flex justify-between mb-10">
@@ -26,8 +27,8 @@ function ListProduct() {
           <span>Precio</span>
           <span>Acciones</span>
         </Li>
-        {products.map((indx, item) => {
-          return <Product key={indx} item={item} />;
+        {products.map((item) => {
+          return <Product key={item._id} item={item} />;
         })}
       </ul>
       <AddTaskModal />

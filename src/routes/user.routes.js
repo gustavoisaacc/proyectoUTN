@@ -17,7 +17,7 @@ routeUser.post(
   userController.create
 );
 
-routeUser.get("/", [isAuth, superadmin], userController.findAll);
+routeUser.get("/", userController.findAll);
 
 routeUser.get("/:id", [isAuth, superadmin], userController.findById);
 
