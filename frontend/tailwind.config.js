@@ -27,6 +27,8 @@ export default {
         error: "#E63E33",
         success: "#7BA05B",
       },
+      
+      
         
       fontFamily: {
         sans: ["Roboto", "sans-serif"],

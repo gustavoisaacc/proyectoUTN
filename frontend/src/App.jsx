@@ -7,6 +7,7 @@ import DashboarLayout from "./layout/DashboarLayout";
 import ProducPage from "./pages/ProducPage";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
+import AboutUs from "./pages/AboutUs"
 
 
 
@@ -23,6 +24,8 @@ function App() {
         </Route>
           <Route path="*" element={<NotFound/>}/>
           <Route path="signin" element={<SignIn/>}/>
+          <Route path="aboutus" element={<AboutUs/>}/>
+          
           
       </Routes>
     </BrowserRouter>
