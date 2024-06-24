@@ -21,7 +21,7 @@ const BusquedaDeComida = () => {
   );
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-primary rounded-xl shadow-md space-y-4 m-2">
+    <div className="relative p-6 max-w-md mx-auto bg-primary rounded-xl shadow-md space-y-4 m-2">
       <input
         type="text"
         placeholder="Buscar comida..."
@@ -30,7 +30,7 @@ const BusquedaDeComida = () => {
         onChange={(e) => setTerminoBusqueda(e.target.value)}
       />
       {terminoBusqueda && (
-        <ul className="mt-4 border rounded-lg shadow-lg bg-white">
+        <ul className="absolute left-0 right-0 mt-2 border rounded-lg shadow-lg bg-white z-10">
           {alimentosFiltrados.length > 0 ? (
             alimentosFiltrados.map((alimento, index) => (
               <li key={index} className="py-2 px-4 border-b last:border-b-0">
@@ -47,3 +47,4 @@ const BusquedaDeComida = () => {
 };
 
 export default BusquedaDeComida;
+

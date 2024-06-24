@@ -19,6 +19,7 @@ function ProducPage() {
       </div>
       <AddProductModal />
       <AddCategoryModal />
+
     </div>
   );
 }
