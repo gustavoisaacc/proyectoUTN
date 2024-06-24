@@ -4,6 +4,7 @@ import { Products } from "../models/product.model.js";
 export const create = async (req, res) => {
   const data = req.body;
   const newProduct = new Products(data);
+  console.log(newProduct);
 
   if (data.category) {
     const foundCategory = await Categories.findOne({
@@ -17,7 +18,7 @@ export const create = async (req, res) => {
   }
 
   await newProduct.save();
-  res.status(201).json({ msg: "Role create successfully ", newProduct });
+  res.status(201).json({ msg: "Product create successfully ", newProduct });
 };
 
 export const findAll = async (req, res) => {
@@ -32,9 +33,30 @@ export const findOne = async (req, res) => {
 };
 
 export const findFilter = async (req, res) => {
-  const { name } = req.query;
-  const products = await Products.find({ name });
-  res.status(200).json(products);
+  try {
+    const { product } = req.query;
+    console.log("Producto recibido:", product);
+
+    if (product) {
+      const search = await Categories.findOne({ name: product });
+      if (search) {
+        console.log("Categoría encontrada:", search._id);
+        const products = await Products.find({ category: search._id });
+        console.log("Productos recibido:", products);
+        return res.status(200).json(products);
+      } else {
+        console.log("Categoría no encontrada para el producto:", product);
+        const error = new Error("Producto no encontrado");
+        res.status(404).json({ msg: error.message });
+      }
+    } else {
+      const products = await Products.find();
+      res.status(200).json(products);
+    }
+  } catch (error) {
+    console.error("Error en findFilter:", error);
+    res.status(500).json({ msg: "Error interno del servidor" });
+  }
 };
 
 export const update = async (req, res) => {

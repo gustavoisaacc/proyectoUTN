@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { useProduct } from "../../context/useAuth";
 
 export default function Button(props) {
+  const { filteredProducts } = useProduct();
+
+  const handleClick = () => {
+    filteredProducts(props.name.toLowerCase());
+  };
+
   return (
-    <Link
-      to={props.path}
-      className={`border w-full border-primary  px-5 py-2 rounded-md text-md md:text-sm font-semibold uppercase  ${props.className}`}
+    <button
+      onClick={handleClick}
+      className={` w-full border border-primary  px-5 py-2 rounded-md text-md md:text-sm font-semibold uppercase  ${props.className}`}
     >
       {props.name}
-    </Link>
+    </button>
   );
 }

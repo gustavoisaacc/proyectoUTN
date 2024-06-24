@@ -19,7 +19,7 @@ export const sigin = async (req, res) => {
     res.status(401).json({ msg: error.message });
   }
 
-  const token = await createAccessToken({ id: user._id });
+  const token = await createAccessToken({ id: user._id, role: user.role });
 
   res.cookie("token", token, {
     httpOnly: true,

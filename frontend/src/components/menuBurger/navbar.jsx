@@ -24,11 +24,9 @@ const Navbar = () => {
           <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
             {PROTECTEDROUTES.map((item) => {
               return (
-                <>
-                  <Link to={item.path} key={item.id}>
-                    {item.name}
-                  </Link>
-                </>
+                <div key={item.id}>
+                  <Link to={item.path}>{item.name}</Link>
+                </div>
               );
             })}
             <button onClick={() => signout()}>logout</button>

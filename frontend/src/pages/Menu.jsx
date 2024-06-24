@@ -1,20 +1,31 @@
-import MenuCardsOrden from "../components/menuCardsOrden"
-import BtnMenuLista from "../components/ui/btnMenuLista"
+import { useEffect } from "react";
+import MenuCardsOrden from "../components/menuCardsOrden";
+import BtnMenuLista from "../components/ui/btnMenuLista";
+import { useProduct } from "../context/useAuth";
 
 const MenuLista = (props) => {
-    return (
-        <>
-            <div>
-                <BtnMenuLista/>
-                <div className="grid grid-cols-2 gap-8 bg-secundary h-full">
-                    <MenuCardsOrden name="burger" description="asdasas" precio="12.000" className="my-3 mx-3 bg-primary"/>
-                    <MenuCardsOrden name="burger" description="asdasas" precio="12.000" className="my-3 mx-3 bg-primary"/>
-                    <MenuCardsOrden name="burger" description="asdasas" precio="12.000" className="my-3 mx-3 bg-primary"/>
-                    <MenuCardsOrden name="burger" description="asdasas" precio="12.000" className="my-3 mx-3 bg-primary"/>
-                </div>
-            </div>
-        </>
-    )
-}
+  const { products, filter, getProducts, error } = useProduct();
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-export default MenuLista
+  console.log(error);
+  return (
+    <>
+      <div>
+        <BtnMenuLista />
+        <div className="grid grid-cols-2 gap-8 bg-secundary h-full">
+          {!error
+            ? filter.map((items) => {
+                return <MenuCardsOrden key={items.id} items={items} />;
+              })
+            : products.map((items) => {
+                return <MenuCardsOrden key={items.id} items={items} />;
+              })}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default MenuLista;

@@ -1,28 +1,63 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { api } from "../libs/axios";
+import { crearProducts } from "../api/products.js";
 
 export const ProductContext = createContext();
 
 export function ProductProvider(props) {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    setLoading(true);
-    api
-      .get("/product")
-      .then((products) => {
-        setProducts(products.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(products);
+  const getProducts = async () => {
+    try {
+      const res = await api.get("/product");
+      setProducts(res.data);
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data);
+      }
+    }
+  };
+
+  const createProduct = async (data) => {
+    try {
+      const res = await crearProducts(data);
+      setProducts([...products, res.data]);
+      return res.data;
+    } catch (error) {
+      if (error.response) {
+        setError(error.response);
+      }
+    }
+  };
+
+  const filteredProducts = async (filter) => {
+    try {
+      if (!filter) {
+        const res = await api.get(`/product/filter}`);
+        return setFilter(res.data);
+      }
+      const res = await api.get(`/product/filter?product=${filter}`);
+      setFilter(res.data);
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data);
+      }
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products, loading, error }}>
+    <ProductContext.Provider
+      value={{
+        createProduct,
+        getProducts,
+        products,
+        filter,
+        filteredProducts,
+        error,
+      }}
+    >
       {props.children}
     </ProductContext.Provider>
   );

@@ -1,8 +1,6 @@
-import React from "react";
 import Li from "../ui/Li";
 
 function Product({ item }) {
-  console.log(item);
   return (
     <Li className="grid-cols-5 px-5">
       <span>imagen</span>

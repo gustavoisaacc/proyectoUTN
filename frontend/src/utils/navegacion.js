@@ -27,9 +27,10 @@ export const PROTECTEDROUTES = [
     path: "/products",
     name: "Productis",
   },
+
   {
     id: 3,
-    path: "/roles-category",
-    name: "roles y categorias",
+    path: "/user",
+    name: "usuarios",
   },
 ];

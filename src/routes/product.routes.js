@@ -11,7 +11,8 @@ export const routerProduct = Router();
 
 routerProduct.post(
   "/",
-  [isAuth, superadmin, validateData(productSchema)],
+  [isAuth, superadmin],
+  validateData(productSchema),
   productController.create
 );
 routerProduct.get("/", productController.findAll);

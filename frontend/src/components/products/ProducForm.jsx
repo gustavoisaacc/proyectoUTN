@@ -1,6 +1,9 @@
+import { useCategory } from "../../context/useAuth";
 import { ErrorMessage } from "../ui/ErrorMessage";
 
-export default function TaskForm() {
+export default function ProductForm({ register, errors }) {
+  const { categories } = useCategory();
+
   return (
     <>
       <div className="flex flex-col gap-5">
@@ -12,11 +15,11 @@ export default function TaskForm() {
           type="text"
           placeholder="Nombre de la tarea"
           className="w-full p-3  border-gray-300 border"
-          // {...register("name", {
-          //   required: "El nombre de la tarea es obligatorio",
-          // })}
+          {...register("name", {
+            required: "El nombre de la tarea es obligatorio",
+          })}
         />
-        {/* {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>} */}
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
       </div>
 
       <div className="flex flex-col gap-5 mt-5">
@@ -24,33 +27,35 @@ export default function TaskForm() {
           Precio
         </label>
         <input
-          id="name"
+          id="price"
           type="number"
           placeholder="Nombre de la tarea"
           className="w-full p-3  border-gray-300 border"
-          // {...register("name", {
-          //   required: "El nombre de la tarea es obligatorio",
-          // })}
+          {...register("price", {
+            required: "El nombre de la tarea es obligatorio",
+          })}
         />
-        {/* {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>} */}
+        {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
       </div>
 
       <div className="flex flex-col gap-5 mt-5">
         <select
           id="category"
           className="w-full p-3  border-gray-300 border mb-5"
-          // {...register("category", {
-          //   required: "La categoria de la tarea es obligatorio",
-          // })}
+          {...register("category", {
+            required: "La categoria de la tarea es obligatorio",
+          })}
         >
           <option value="">Seleccione una categoria</option>
-          <option value="ct1">Categoria 1</option>
-          <option value="ct1">Categoria 2</option>
-          <option value="ct3">Categoria 3</option>
+          {categories.map((category) => (
+            <option key={category._id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
         </select>
-        {/* {errors.category && (
+        {errors.category && (
           <ErrorMessage>{errors.category.message}</ErrorMessage>
-        )} */}
+        )}
       </div>
 
       <div className="flex flex-col gap-5 mt-5">
@@ -61,13 +66,13 @@ export default function TaskForm() {
           id="description"
           placeholder="Descripción de la tarea"
           className="w-full p-3  border-gray-300 border"
-          // {...register("description", {
-          //   required: "La descripción de la tarea es obligatoria",
-          // })}
+          {...register("description", {
+            required: "La descripción de la tarea es obligatoria",
+          })}
         />
-        {/* {errors.description && (
+        {errors.description && (
           <ErrorMessage>{errors.description.message}</ErrorMessage>
-        )} */}
+        )}
       </div>
     </>
   );

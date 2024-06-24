@@ -7,7 +7,7 @@ function DashboarLayout({ isAllow, redirectTo }) {
     return <Navigate to={redirectTo} />;
   }
   return (
-    <div className="w-screen h-screen grid grid-cols-layout grid-rows-[auto,1fr,auto] ">
+    <div className="w-full h-screen grid grid-cols-layout grid-rows-[auto,1fr,auto] ">
       <header className="bg-primary row-span-1">
         <Navbar />
       </header>

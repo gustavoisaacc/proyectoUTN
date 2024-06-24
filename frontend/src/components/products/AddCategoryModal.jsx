@@ -1,4 +1,7 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import {
   Dialog,
   DialogPanel,
@@ -6,54 +9,37 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
+import { useCategory } from "../../context/useAuth";
 
-import TaskForm from "./TaskForm";
-import { useLocation, useNavigate } from "react-router-dom";
+function AddCategoryModal() {
+  //hook para crear category
 
-export default function AddTaskModal() {
-  // //obteniendo si el modal esite
+  const { crearCategory } = useCategory();
+
+  // //obteniendo si el modal exite
   const navitage = useNavigate();
   const location = useLocation();
   const queyParam = new URLSearchParams(location.search);
-  const query = queyParam.get("newproduct");
+  const query = queyParam.get("newcategory");
   const show = query ? true : false;
-  // //obteniendo id de los proyectos
-  // const params = useParams();
-  // const projectId = params.projectId!;
 
-  // const initialValue = {
-  //   name: "",
-  //   description: "",
-  // };
+  const initialValue = {
+    name: "",
+  };
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm({ defaultValues: initialValue });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  // const queryClient = useQueryClient();
-  // const { mutate } = useMutation({
-  //   mutationFn: createTask,
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //   },
-  //   onSuccess: (data) => {
-  //     toast.success(data);
-  //     reset();
-  //     navitage(location.pathname, { replace: true });
-  //     queryClient.invalidateQueries({ queryKey: ["getProject", projectId] });
-  //   },
-  // });
+  const onSubmit = handleSubmit(async (data) => {
+    await crearCategory(data);
+    navitage("/dashboard");
+    reset(initialValue);
+  });
 
-  // const handleForm = handleSubmit((formData) => {
-  //   const data = {
-  //     formData,
-  //     projectId,
-  //   };
-  //   mutate(data);
-  // });
   return (
     <>
       <Transition appear show={show} as={Fragment}>
@@ -88,12 +74,25 @@ export default function AddTaskModal() {
               >
                 <DialogPanel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
                   <DialogTitle as="h3" className="font-black text-4xl  my-5">
-                    Producto
+                    Categoria
                   </DialogTitle>
 
-                  <form className=" mt-10 bg-white shadow-lg p-10 round-lg ">
-                    <TaskForm />
-
+                  <form
+                    onSubmit={onSubmit}
+                    className=" mt-10 bg-white shadow-lg p-10 round-lg "
+                  >
+                    <input
+                      className="w-full border rounded-lg p-2 "
+                      name="name"
+                      type="text"
+                      placeholder="Nombre"
+                      {...register("name", {
+                        required: "El nombre de la tarea es obligatorio",
+                      })}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500">{errors.name.message}</p>
+                    )}
                     <input
                       type="submit"
                       value="Enviar"
@@ -109,3 +108,5 @@ export default function AddTaskModal() {
     </>
   );
 }
+
+export default AddCategoryModal;

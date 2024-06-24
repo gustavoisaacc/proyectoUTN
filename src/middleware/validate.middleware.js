@@ -4,6 +4,9 @@ import { SECURITY_KEY } from "../config/config.js";
 import { Users } from "../models/user.model.js";
 import { Roles } from "../models/role.model.js";
 
+import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId;
+
 export const validateData = (schema) => (req, res, next) => {
   try {
     schema.parse(req.body);
@@ -35,15 +38,13 @@ export const isAuth = (req, res, next) => {
       return res.status(401).json({ message: "Invalid credential" });
     }
     req.userId = decoded.id;
+    req.role = decoded.role;
     next();
   });
 };
 
 export const superadmin = async (req, res, next) => {
-  console.log("admin");
-  console.log(req.userId);
-  const user = await Users.findById(req.userId);
-  const role = await Roles.findById(user.role);
+  const role = await Roles.findById(req.role);
   if (role.name !== "superadmin") {
     return res.status(401).json({ message: "authorization denied" });
   }

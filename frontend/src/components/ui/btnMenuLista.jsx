@@ -1,15 +1,15 @@
-import Button from "./ButtonLucia"
+import Button from "./ButtonLucia";
 
-const BtnMenuLista = () =>{
-    return(
-        <div className="flex bg-secundary">
-                <Button name="Super BURGER" />
-                <Button name="Super LOMO" />
-                <Button name="Super PIZZA" />
-                <Button name="Super MEXICANO" />
-                <Button name="Super MILANESA" />
-            </div>
-    )
-}
+const BtnMenuLista = () => {
+  return (
+    <div className="flex bg-secundary">
+      <Button name="BURGERS" />
+      <Button name="LOMO" />
+      <Button name="PIZZA" />
+      <Button name="MEXICANO" />
+      <Button name="MILANESA" />
+    </div>
+  );
+};
 
-export default BtnMenuLista
+export default BtnMenuLista;

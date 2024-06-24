@@ -7,7 +7,7 @@ function OrderList() {
       <div className=" overflow-hidden rounded-lg shadow-xl  p-10 border">
         <h1 className="text-3xl font-semibold mb-5">Ordenes Recientes</h1>
         <ul className="w-full">
-          <Li>
+          <Li className="grid-cols-4">
             <span>Order ID</span>
             <span>Cliente</span>
             <span>Total</span>
@@ -17,14 +17,14 @@ function OrderList() {
             // eslint-disable-next-line array-callback-return
             order.map((order) => {
               return (
-                <>
+                <div key={order.orderId}>
                   <Li className="grid-cols-4">
                     <span>{order.orderId}</span>
                     <span>{order.name}</span>
                     <span>{order.price}</span>
                     <span>{order.status}</span>
                   </Li>
-                </>
+                </div>
               );
             })
           }
