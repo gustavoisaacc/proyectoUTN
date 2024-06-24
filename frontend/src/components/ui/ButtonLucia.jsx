@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useProduct } from "../../context/useAuth";
 
 export default function Button(props) {
   const { filteredProducts } = useProduct();
+
+  useEffect(() => {
+    filteredProducts();
+  }, []);
 
   const handleClick = () => {
     filteredProducts(props.name.toLowerCase());

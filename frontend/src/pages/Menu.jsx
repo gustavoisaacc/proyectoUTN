@@ -4,24 +4,25 @@ import BtnMenuLista from "../components/ui/btnMenuLista";
 import { useProduct } from "../context/useAuth";
 
 const MenuLista = (props) => {
-  const { products, filter, getProducts, error } = useProduct();
+  const { filter, getProducts, error } = useProduct();
   useEffect(() => {
     getProducts();
   }, []);
 
-  console.log(error);
   return (
     <>
       <div>
         <BtnMenuLista />
         <div className="grid grid-cols-2 gap-8 bg-secundary h-full">
-          {!error
-            ? filter.map((items) => {
-                return <MenuCardsOrden key={items.id} items={items} />;
-              })
-            : products.map((items) => {
-                return <MenuCardsOrden key={items.id} items={items} />;
-              })}
+          {error ? (
+            <p className="w-full h-[500px] flex items-center justify-center ">
+              <span className="font-semibold text-2xl  ">No hay productos</span>
+            </p>
+          ) : (
+            filter.map((items) => {
+              return <MenuCardsOrden key={items.id} items={items} />;
+            })
+          )}
         </div>
       </div>
     </>

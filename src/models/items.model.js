@@ -15,12 +15,6 @@ const itemsSchema = new mongoose.Schema(
       trim: true,
       default: 1,
     },
-    totalPrice: {
-      type: Number,
-      required: true,
-      trim: true,
-      default: 0,
-    },
   },
   {
     timestamps: true,
