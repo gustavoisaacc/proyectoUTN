@@ -1,17 +1,21 @@
-import { ProductItems } from "../models/items.model";
-import { Products } from "../models/product.model";
+import { ProductItems } from "../models/items.model.js";
+import { Products } from "../models/product.model.js";
 
 export const crearItems = async (req, res) => {
   const { id, amount } = req.body;
   const items = await Products.findById(id);
-  if (items) {
-    const newItem = new ProductItems({
-      productId: id,
-      amount: amount,
-    });
-    await newItem.save();
-    res.status(200).json(newItem);
+  if (!items) {
+    const error = new Error("Product not found");
+    return res.status(404).json({ msg: error.message });
   }
+  const total = items.price * amount;
+  const newItem = new ProductItems({
+    productId: id,
+    amount: amount,
+    total: total,
+  });
+  await newItem.save();
+  res.status(200).json(newItem);
 };
 
 export const order = async (req, res) => {

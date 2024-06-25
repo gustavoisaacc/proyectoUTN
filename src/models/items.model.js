@@ -15,6 +15,11 @@ const itemsSchema = new mongoose.Schema(
       trim: true,
       default: 1,
     },
+    total: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

@@ -9,6 +9,7 @@ import { routeRole } from "./routes/role.routes.js";
 import { routeCategory } from "./routes/category.routes.js";
 import { routerProduct } from "./routes/product.routes.js";
 import { authRoute } from "./routes/auth.routes.js";
+import { carRouter } from "./routes/car.routes.js";
 
 import { config } from "dotenv";
 import { connectDB } from "./config/db.js";
@@ -42,6 +43,7 @@ app.use("/api/v1/role", routeRole);
 app.use("/api/v1/product", routerProduct);
 app.use("/api/v1/category", routeCategory);
 app.use("/api/v1/", authRoute);
+app.use("/api/v1/", carRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
