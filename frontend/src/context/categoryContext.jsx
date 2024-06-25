@@ -29,10 +29,36 @@ function CategoryProvider(props) {
       }
     }
   };
+  
+  const deleteCategory = async ({id}) => {
+   
+    try {
+      const res = await api.delete(`/category/${id}`);
+    if (res.status === 204) {
+      setCategories(categories.filter((item) => item.id !== id));
+    }
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
+
+  const updateCategory = async (id, data) => {
+   
+    try {
+      const res = await api.put(`/category/${id}`, data);
+      return res.data
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
 
   return (
     <categoryContext.Provider
-      value={{ crearCategory, getCategories, categories, error }}
+      value={{ crearCategory, getCategories, deleteCategory, updateCategory, categories, error }}
     >
       {props.children}
     </categoryContext.Provider>

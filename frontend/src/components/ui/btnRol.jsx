@@ -1,21 +1,21 @@
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { useProduct } from "../../context/useAuth";
+import { useRole } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 
 
-const BtnIcono = (id) => {
-    const {deleteProduct} = useProduct()
+const BtnRol = (id) => {
+    const {deleteRol} = useRole()
     const navigate = useNavigate();
     const handleDelete = async(id)=> {
-        await deleteProduct(id)
+        await deleteRol(id)
        console.log(id)
     }
     return (
         <>
             <div className="flex">
                 <button 
-                onClick={()=> navigate("?updateProduct=true")}
+                onClick={()=> navigate("?updateRole=true")}
                 className="mx-4">
                     <FiEdit size={20} />
                 </button>
@@ -29,4 +29,4 @@ const BtnIcono = (id) => {
     )
 }
 
-export default BtnIcono;
+export default BtnRol;

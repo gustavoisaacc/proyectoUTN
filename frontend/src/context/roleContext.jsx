@@ -29,8 +29,34 @@ function RoleProvider(props) {
     }
   };
 
+  const deleteRol = async ({id}) => {
+   
+    try {
+      const res = await api.delete(`/role/${id}`);
+    if (res.status === 204) {
+      setRole(role.filter((item) => item.id !== id));
+    }
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
+
+  const updateRol = async (id, data) => {
+   
+    try {
+      const res = await api.put(`/role/${id}`, data);
+      return res.data
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
+
   return (
-    <RoleContext.Provider value={{ getRole, createRole, role, error }}>
+    <RoleContext.Provider value={{ getRole, createRole, deleteRol, updateRol, role, error }}>
       {props.children}
     </RoleContext.Provider>
   );

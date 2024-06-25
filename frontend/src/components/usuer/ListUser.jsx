@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useUsers } from "../../context/useAuth";
 import Li from "../ui/Li";
-import BtnIcono from "../ui/btnIcono";
+import BtnUser from "../ui/btnUser";
 
 function ListUser() {
   const { users, getUsers } = useUsers();
@@ -29,7 +29,7 @@ function ListUser() {
                   ? item.role.map((item) => item.name)
                   : "no hay role"}
               </span>
-              <button><BtnIcono/></button>
+              <button><BtnUser id={item._id}/></button>
             </Li>
           );
         })

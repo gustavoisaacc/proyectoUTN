@@ -1,5 +1,7 @@
 import MenuNewItem from "../components/products/MenuNewItem";
 import AddRoleModal from "../components/usuer/AddRoleModal";
+import AddUpdateRoleModal from "../components/usuer/AddUpdateRoleModal";
+import AddUpdateUserModal from "../components/usuer/AddUpdateUseModal";
 import AddUserModal from "../components/usuer/AddUserModal";
 import ListUser from "../components/usuer/ListUser";
 import ListRole from "../components/usuer/ListaRole";
@@ -14,6 +16,8 @@ function UserPage() {
       </div>
       <AddUserModal />
       <AddRoleModal />
+      <AddUpdateUserModal/>
+      <AddUpdateRoleModal/>
     </div>
   );
 }

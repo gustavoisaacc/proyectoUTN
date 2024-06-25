@@ -61,6 +61,18 @@ export function ProductProvider(props) {
     }
   }
 
+  const updateProduct = async (id, data) => {
+   
+    try {
+      const res = await api.put(`/product/${id}`, data);
+      return res.data
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -70,6 +82,7 @@ export function ProductProvider(props) {
         filter,
         filteredProducts,
         deleteProduct,
+        updateProduct,
         msg,
         error,
       }}

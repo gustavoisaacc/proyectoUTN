@@ -4,6 +4,8 @@ import AddProductModal from "../components/products/AddProductModel";
 import AddCategoryModal from "../components/products/AddCategoryModal";
 import ListCategory from "../components/products/ListCategory";
 import { useProduct } from "../context/useAuth";
+import AddUpdateSModal from "../components/products/AddUpdateModal";
+import AddUpdateCategoryModal from "../components/products/AddUpdateCategoryModal";
 
 function ProducPage() {
   const {msg, error} = useProduct()
@@ -23,6 +25,8 @@ function ProducPage() {
       </div>
       <AddProductModal />
       <AddCategoryModal />
+      <AddUpdateSModal/>
+      <AddUpdateCategoryModal/>
     </div>
   );
 }

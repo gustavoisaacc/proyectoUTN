@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useRole } from "../../context/useAuth";
 import Li from "../ui/Li";
-import BtnIcono from "../ui/btnIcono";
+import BtnRol from "../ui/btnRol";
 
 function ListRole() {
   const { role, getRole } = useRole();
   useEffect(() => {
     getRole();
+    console.log(role)
   }, []);
   return (
     <ul className="w-full md:w-[40%] border rounded-md">
@@ -20,7 +21,7 @@ function ListRole() {
           return (
             <Li className="grid-cols-2 px-5" key={item._id}>
               <span>{item.name}</span>
-              <button><BtnIcono/></button>
+              <button><BtnRol id={item._id}/></button>
             </Li>
           );
         })}
