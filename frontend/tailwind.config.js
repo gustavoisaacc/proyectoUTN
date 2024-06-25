@@ -23,6 +23,8 @@ export default {
         success: "#7BA05B",
       },
 
+      
+      
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
         letters: ["Six Caps", "Barlow Condensed"],
