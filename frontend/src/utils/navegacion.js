@@ -6,7 +6,7 @@ export const navegacion = [
   },
   {
     id: 2,
-    path: "/abaout",
+    path: "/aboutus",
     name: "Acerca de",
   },
   {

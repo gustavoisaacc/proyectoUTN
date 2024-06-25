@@ -1,13 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { isAxiosError } from "axios";
 import { api } from "../libs/axios";
-import Cookie from "js-cookie";
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState(null);
 
   const signin = async (data) => {
@@ -15,10 +13,9 @@ function AuthProvider({ children }) {
       const res = await api.post("/signin", data);
       setUser(res);
       setIsAuth(true);
-      Cookie.set("token", res.data.token);
       return res.data;
     } catch (error) {
-      if (isAxiosError(error) && error.response.data) {
+      if (error.response.data) {
         return setError(error.response.data);
       }
     }
