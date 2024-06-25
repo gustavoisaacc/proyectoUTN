@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRole } from "../../context/useAuth";
 import Li from "../ui/Li";
+import BtnIcono from "../ui/btnIcono";
 
 function ListRole() {
   const { role, getRole } = useRole();
@@ -19,6 +20,7 @@ function ListRole() {
           return (
             <Li className="grid-cols-2 px-5" key={item._id}>
               <span>{item.name}</span>
+              <button><BtnIcono/></button>
             </Li>
           );
         })}

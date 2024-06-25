@@ -3,8 +3,12 @@ import MenuNewItem from "../components/products/MenuNewItem";
 import AddProductModal from "../components/products/AddProductModel";
 import AddCategoryModal from "../components/products/AddCategoryModal";
 import ListCategory from "../components/products/ListCategory";
+import { useProduct } from "../context/useAuth";
 
 function ProducPage() {
+  const {msg, error} = useProduct()
+ console.log(msg)
+ console.log(error)
   return (
     <div className="w-[95%] m-auto my-10">
       <MenuNewItem
@@ -19,7 +23,6 @@ function ProducPage() {
       </div>
       <AddProductModal />
       <AddCategoryModal />
-
     </div>
   );
 }

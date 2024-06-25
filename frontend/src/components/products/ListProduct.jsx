@@ -2,12 +2,14 @@ import Li from "../ui/Li";
 
 import { useProduct } from "../../context/useAuth";
 import { useEffect } from "react";
+import BtnIcono from "../ui/btnIcono";
 
 function ListProduct() {
   const { products, getProducts } = useProduct();
   useEffect(() => {
     getProducts();
   }, []);
+
   return (
     <>
       <ul className="w-full border rounded-md">
@@ -33,6 +35,9 @@ function ListProduct() {
                     : "no hay categorias"}
                 </span>
                 <span>{item.price}</span>
+                <span>
+                  <BtnIcono id={item._id}/>
+                </span>
               </Li>
             );
           })

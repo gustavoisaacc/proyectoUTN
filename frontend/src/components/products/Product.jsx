@@ -6,11 +6,13 @@ function Product({ item }) {
 
     <>
       <Li className="grid-cols-5 px-5">
-        <span></span>
+        <span>imagen</span>
         <span>{item.name}</span>
         <span>{item.category.map((item) => item.name)}</span>
         <span>{item.price}</span>
-        <button><BtnIcono /></button>
+        <span>
+          imagen
+        </span>
       </Li>
     </>
     

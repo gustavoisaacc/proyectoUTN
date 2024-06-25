@@ -41,7 +41,7 @@ function AddRoleModal() {
   });
 
   return (
-    <>
+    
       <Transition appear show={show} as={Fragment}>
         <Dialog
           as="div"
@@ -105,7 +105,7 @@ function AddRoleModal() {
           </div>
         </Dialog>
       </Transition>
-    </>
+    
   );
 }
 

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useCategory } from "../../context/useAuth";
 import Li from "../ui/Li";
+import BtnIcono from "../ui/btnIcono";
 
 function ListCategory() {
   const { categories, getCategories } = useCategory();
@@ -19,6 +20,7 @@ function ListCategory() {
         return (
           <Li className="grid-cols-2 px-5" key={item._id}>
             {item.name}
+            <button><BtnIcono/></button>
           </Li>
         );
       })}

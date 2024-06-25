@@ -8,6 +8,7 @@ export function ProductProvider(props) {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState(null)
 
   const getProducts = async () => {
     try {
@@ -46,6 +47,20 @@ export function ProductProvider(props) {
     }
   };
 
+  const deleteProduct = async ({id}) => {
+   
+    try {
+      const res = await api.delete(`/product/${id}`);
+    if (res.status === 204) {
+      setProducts(products.filter((item) => item.id !== id));
+    }
+    } catch (error) {
+      if(error.response){
+        setError(error.response.data)
+      }
+    }
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -54,6 +69,8 @@ export function ProductProvider(props) {
         products,
         filter,
         filteredProducts,
+        deleteProduct,
+        msg,
         error,
       }}
     >

@@ -1,16 +1,24 @@
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
+import { useProduct } from "../../context/useAuth";
 
-const BtnIcono = () => {
+const BtnIcono = (id) => {
+    const {deleteProduct} = useProduct()
+    const handleEvent = async(id)=> {
+        await deleteProduct(id)
+       console.log(id)
+    }
     return (
         <>
             <div className="flex">
-                <div className="mx-4">
+                <button 
+                onClick={()=>handleEvent(id)}
+                className="mx-4">
                     <FiEdit size={20} />
-                </div>
-                <div className="mx-4">
-                    <MdDelete size={25} />
-                </div>
+                </button>
+                <button className="mx-4">
+                    <MdDelete size={20} />
+                </button>
             </div>
         </>
     )

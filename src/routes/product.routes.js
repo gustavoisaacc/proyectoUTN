@@ -19,4 +19,4 @@ routerProduct.get("/", productController.findAll);
 routerProduct.get("/filter", productController.findFilter);
 routerProduct.get("/:id", productController.findOne);
 routerProduct.put("/:id", [isAuth, superadmin], productController.update);
-routerProduct.delete("/:id", [isAuth, superadmin], productController.deleteOne);
+routerProduct.delete("/:id", [isAuth], productController.deleteOne);
