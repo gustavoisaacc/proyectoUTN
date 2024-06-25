@@ -8,7 +8,8 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      
+        colors: {
         primary: "#053F5C",
         primaryLigth: "#429EBD",
         black: "#333333",
@@ -26,7 +27,11 @@ export default {
         sans: ["Roboto", "sans-serif"],
         letters: ["Six Caps", "Barlow Condensed"],
       },
+
     },
   },
   plugins: [],
+  
 };
+
+
