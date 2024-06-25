@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { api } from "../libs/axios";
+import Cookie from "js-cookie";
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
@@ -11,6 +12,7 @@ function AuthProvider({ children }) {
   const signin = async (data) => {
     try {
       const res = await api.post("/signin", data);
+      Cookie.set("token", res.data.token);
       setUser(res);
       setIsAuth(true);
       return res.data;

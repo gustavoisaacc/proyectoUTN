@@ -40,18 +40,13 @@ export const findFilter = async (req, res) => {
     if (product) {
       const search = await Categories.findOne({ name: product });
       if (search) {
-        console.log("Categoría encontrada:", search._id);
         const products = await Products.find({ category: search._id });
-        console.log("Productos recibido:", products);
         return res.status(200).json(products);
       } else {
         console.log("Categoría no encontrada para el producto:", product);
         const error = new Error("Producto no encontrado");
         res.status(404).json({ msg: error.message });
       }
-    } else {
-      const products = await Products.find();
-      res.status(200).json(products);
     }
   } catch (error) {
     console.error("Error en findFilter:", error);
@@ -87,10 +82,6 @@ export const deleteOne = async (req, res) => {
   const { id } = req.params;
   const product = await Products.findById(id);
 
-  if (!role) {
-    const error = new Error("Product not found");
-    return res.status(404).json({ msg: error.message });
-  }
   await product.deleteOne();
   res.status(200).json({ msg: "Product delete successfully " });
 };

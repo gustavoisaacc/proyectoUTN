@@ -33,11 +33,12 @@ export function ProductProvider(props) {
   };
 
   const filteredProducts = async (filter) => {
-    const search = filter ? filter : "burgers";
     try {
-      const res = await api.get(`/product/filter?product=${search}`);
+      const res = await api.get(`/product/filter?product=${filter}`);
       setError(null);
       setFilter(res.data);
+      console.log(res.data);
+      return res.data;
     } catch (error) {
       if (error.response) {
         setError(error.response.data);

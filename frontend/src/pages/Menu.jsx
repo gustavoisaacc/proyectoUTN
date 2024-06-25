@@ -3,10 +3,11 @@ import MenuCardsOrden from "../components/menuCardsOrden";
 import BtnMenuLista from "../components/ui/btnMenuLista";
 import { useProduct } from "../context/useAuth";
 
-const MenuLista = (props) => {
-  const { filter, getProducts, error } = useProduct();
+const MenuLista = () => {
+  const { filteredProducts, filter, getProducts, error } = useProduct();
   useEffect(() => {
     getProducts();
+    filteredProducts();
   }, []);
 
   return (

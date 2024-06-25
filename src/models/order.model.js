@@ -1,26 +1,35 @@
 import mongoose from "mongoose";
-
+const StatusOrder = {
+  PENDING: "pendiente",
+  PROCESSING: "en proceso",
+  DELIVERED: "completo",
+};
 const orderSchema = new mongoose.Schema({
   user: {
     type: Number,
     required: true,
   },
-  orderId: {
-    type: mongoose.Types.ObjectId,
-    ref: "ProductItems",
-    required: true,
-  },
+  orderId: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "ProductItems",
+      required: true,
+    },
+  ],
   orderNumber: {
     type: Number,
-    default: 1,
+    required: true,
+    trim: true,
   },
-  totalPrice: {
+  total: {
     type: Number,
     required: true,
   },
   status: {
     type: String,
     required: true,
+    default: StatusOrder.PENDING,
+    enum: [StatusOrder.PENDING, StatusOrder.PROCESSING, StatusOrder.DELIVERED],
   },
 });
 

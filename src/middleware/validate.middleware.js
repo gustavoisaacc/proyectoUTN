@@ -44,9 +44,14 @@ export const isAuth = (req, res, next) => {
 };
 
 export const superadmin = async (req, res, next) => {
-  const role = await Roles.findById(req.role);
-  if (role.name !== "superadmin") {
-    return res.status(401).json({ message: "authorization denied" });
+  try {
+    const role = await Roles.findById(req.role);
+    console.log(role.name);
+    if (role.name !== "superadmin") {
+      return res.status(401).json({ message: "authorization denied" });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
   }
-  next();
 };

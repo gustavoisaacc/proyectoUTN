@@ -2,13 +2,11 @@ import mongoose from "mongoose";
 
 const itemsSchema = new mongoose.Schema(
   {
-    productId: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Products",
-        required: true,
-      },
-    ],
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Products",
+      required: true,
+    },
     amount: {
       type: Number,
       required: true,
