@@ -54,4 +54,9 @@ export const superadmin = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
+<<<<<<< HEAD
 };
+=======
+  next();
+}
+>>>>>>> 3e82db9 (update developer)

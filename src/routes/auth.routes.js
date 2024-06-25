@@ -8,3 +8,4 @@ export const authRoute = Router();
 authRoute.post("/signin", authControllers.sigin);
 authRoute.post("/signout", authControllers.signOut);
 authRoute.get("/profile", [isAuth], authControllers.profile);
+

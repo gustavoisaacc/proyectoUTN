@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import AboutUs from "./pages/AboutUs";
 
 import { useAuth } from "./context/useAuth";
+
 import UserPage from "./pages/UserPage";
 
 function App() {
