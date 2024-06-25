@@ -18,13 +18,13 @@ const CounterButton = () => {
           className="border-2 border-green-500 bg-green-500 text-white px-6 py-1 rounded-2xl"
           onClick={handleIncrement}
         >
-        Sumar
+        +
         </button>
         <button 
           className="border-2 border-red-500 bg-red-500 text-white px-6 py-1 rounded-2xl"
           onClick={handleDecrement}
         >
-          Quitar
+          -
         </button>
       </div>
       <div className="text-xl">Cantidad: {count}</div>

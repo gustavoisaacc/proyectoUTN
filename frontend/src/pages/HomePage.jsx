@@ -6,6 +6,7 @@ import CardList from "../components/CardList";
 import Comment from "../components/Comment";
 
 import Carousel from "../components/carousel/Carousel";
+import { Link } from "react-router-dom";
 function HomePage() {
   return (
     <div>
@@ -17,20 +18,14 @@ function HomePage() {
             description="Explora nuestros productos premium y aprende sobre el fascinante mundo de la gastronomía"
           >
             <div className="mt-5 flex justify-between gap-5 ">
-              <Button
-                path="/menu"
-                name="Pedidos"
-                className="bg-primary text-white text-center"
-              />
-              <Button
-                path="about"
-                name="ver mas"
-                className=" text-slate-400 bg-white text-center"
-              />
+              
+              <Link className=" w-full border border-primary  bg-primary text-white text-center px-5 py-2 rounded-md text-md md:text-sm font-semibold uppercase" to="/menu">Pedidos</Link>
+              <Link className=" w-full border border-primary  text-slate-400 bg-white text-center px-5 py-2 rounded-md text-md md:text-sm font-semibold uppercase" to="/aboutus">Pedidos</Link>
+           
             </div>
           </CardHeders>
           <section>
-            <div className=" max-w-lg">
+            <div className=" w-full bg-zinc-400 p-5 " >
               <Carousel />
             </div>
           </section>

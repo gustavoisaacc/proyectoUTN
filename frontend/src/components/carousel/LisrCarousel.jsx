@@ -20,7 +20,7 @@ function LisrCarousel({
   }, []);
 
   return (
-    <div className="overflow-hidden relative w-full md:w-[500px] h-[250px]">
+    <div className="overflow-hidden relative w-full md:w-[700px] h-[467px]">
       <div
         className="flex transition-transform ease-out duration-200 "
         style={{ transform: `translateX(-${curr * 100}%)` }}

@@ -19,7 +19,7 @@ routeUser.post(
 
 routeUser.get("/", userController.findAll);
 
-routeUser.get("/:id", [isAuth, superadmin], userController.findById);
+routeUser.get("/:id", userController.findById);
 
 routeUser.put("/:id", [isAuth, superadmin], userController.update);
 

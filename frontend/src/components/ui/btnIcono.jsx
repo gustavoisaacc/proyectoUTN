@@ -9,13 +9,13 @@ const BtnIcono = (id) => {
     const navigate = useNavigate();
     const handleDelete = async(id)=> {
         await deleteProduct(id)
-       console.log(id)
+        navitage("/dashboard");
     }
     return (
         <>
             <div className="flex">
                 <button 
-                onClick={()=> navigate("?updateProduct=true")}
+                onClick={()=> navigate(`?updateUser=true?id=${id.id}`)}
                 className="mx-4">
                     <FiEdit size={20} />
                 </button>

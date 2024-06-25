@@ -73,11 +73,17 @@ export function ProductProvider(props) {
     }
   }
 
+  const getByIdProduct = async ({ id }) => {
+    const res = await api.get(`/product/${id}`);
+    return res.data
+  }
+
   return (
     <ProductContext.Provider
       value={{
         createProduct,
         getProducts,
+        getByIdProduct,
         products,
         filter,
         filteredProducts,

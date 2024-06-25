@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -15,7 +15,8 @@ import { useUsers } from "../../context/useAuth";
 
 function AddUpdateUserModal() {
   //hook para crear user
-  const { createUsers } = useUsers();
+  const { createUsers, getByIdUser,updateUser } = useUsers();
+  const [values, setValues] = useState([])
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -23,11 +24,22 @@ function AddUpdateUserModal() {
   const queyParam = new URLSearchParams(location.search);
   const query = queyParam.get("updateUser");
   const show = query ? true : false;
+  const paramsObject = {};
 
+    queyParam.forEach((value, key) => {
+      paramsObject[key] = value;
+    })
+
+    const { id} = paramsObject
+   
+    useEffect(()=> {
+        getByIdUser(id).then((res)=> setValues(res)).catch(error => console.log(error))
+
+    },[id])
   const initialValue = {
     name: "",
   };
-
+console.log(values)
   const {
     register,
     handleSubmit,
@@ -36,7 +48,6 @@ function AddUpdateUserModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    await createUsers(data);
     navitage("/dashboard");
     reset(initialValue);
   });
@@ -82,7 +93,7 @@ function AddUpdateUserModal() {
                     onSubmit={onSubmit}
                     className=" mt-10 bg-white shadow-lg p-10 round-lg "
                   >
-                    <UserForm register={register} errors={errors} />
+                    <UserForm register={register} errors={errors} values={values} />
                     <input
                       type="submit"
                       value="Enviar"

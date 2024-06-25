@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Roles } from "../models/role.model.js";
 import { Users } from "../models/user.model.js";
 import { hash } from "../utils/encryptPassword.js";
@@ -25,9 +26,10 @@ export const findAll = async (req, res) => {
   res.status(200).json(user);
 };
 
-export const findById = (req, res) => {
-  const { id } = req.params;
-  const user = Users.findById(id);
+export const findById = async(req, res) => {
+ 
+  console.log(req.params.id)
+  const user = await Users.findById(req.params.id);
   res.status(200).json(user);
 };
 
@@ -42,9 +44,14 @@ export const update = async (req, res) => {
     const error = new Error("User not found");
     res.status(404).json({ msg: error.message });
   }
-
+  if (data.role) {
+    const foundRole = await Roles.findOne({ name: { $in: data.role } });
+    if (!foundRole)
+      return res.status(400).json({ message: "role not found" });
+    findUser.role = Array(foundRole).map((role) => role._id);
+  }
   findUser.name = data.name || findUser.name;
-  findUser.password = data.password || findUser.password;
+
 
   await findUser.save();
   res.status(200).json({ msg: "user updated successfully", findUser });

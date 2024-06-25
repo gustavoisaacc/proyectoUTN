@@ -31,34 +31,41 @@ function UserProvider(props) {
     }
   };
 
-  const deleteUser = async ({id}) => {
-   
+  const deleteUser = async ({ id }) => {
+
     try {
       const res = await api.delete(`/users/${id}`);
-    if (res.status === 204) {
-      setUsers(users.filter((item) => item.id !== id));
-    }
+      if (res.status === 204) {
+        setUsers(users.filter((item) => item.id !== id));
+      }
     } catch (error) {
-      if(error.response){
+      if (error.response) {
         setError(error.response.data)
       }
     }
   }
 
   const updateUser = async (id, data) => {
-   
+
     try {
       const res = await api.put(`/users/${id}`, data);
       return res.data
     } catch (error) {
-      if(error.response){
+      if (error.response) {
         setError(error.response.data)
       }
     }
   }
 
+  const getByIdUser = async (id) => {
+    console.log(id)
+    const res = await api.get(`/users/${id}`);
+    return res.data
+  }
+
+
   return (
-    <UserContext.Provider value={{ getUsers, createUsers, deleteUser, updateUser,  users, errors }}>
+    <UserContext.Provider value={{ getUsers, getByIdUser, createUsers, deleteUser, updateUser, users, errors }}>
       {props.children}
     </UserContext.Provider>
   );

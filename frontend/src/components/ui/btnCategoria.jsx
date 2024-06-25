@@ -9,7 +9,7 @@ const BtnCategoria = (id) => {
     const navigate = useNavigate();
     const handleDelete = async(id)=> {
         await deleteCategory(id)
-       console.log(id)
+        navitage("/dashboard");
     }
     return (
         <>

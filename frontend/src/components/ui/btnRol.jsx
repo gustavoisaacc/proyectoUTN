@@ -9,7 +9,7 @@ const BtnRol = (id) => {
     const navigate = useNavigate();
     const handleDelete = async(id)=> {
         await deleteRol(id)
-       console.log(id)
+        navitage("/dashboard");
     }
     return (
         <>

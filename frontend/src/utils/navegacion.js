@@ -25,7 +25,7 @@ export const PROTECTEDROUTES = [
   {
     id: 2,
     path: "/products",
-    name: "Productis",
+    name: "Productos",
   },
 
   {

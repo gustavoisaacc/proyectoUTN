@@ -50,13 +50,10 @@ export const superadmin = async (req, res, next) => {
     if (role.name !== "superadmin") {
       return res.status(401).json({ message: "authorization denied" });
     }
-    next();
   } catch (error) {
     console.log(error);
   }
-<<<<<<< HEAD
-};
-=======
   next();
-}
->>>>>>> 3e82db9 (update developer)
+};
+
+

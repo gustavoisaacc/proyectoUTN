@@ -1,8 +1,9 @@
 import { useRole } from "../../context/useAuth";
 import { ErrorMessage } from "../ui/ErrorMessage";
 
-function UserForm({ register, errors }) {
+function UserForm({ register, errors,values }) {
   const { role } = useRole();
+
   return (
     <>
       <div className="flex flex-col gap-5">
@@ -12,6 +13,7 @@ function UserForm({ register, errors }) {
         <input
           id="name"
           type="text"
+          
           placeholder="Nombre de la tarea"
           className="w-full p-3  border-gray-300 border"
           {...register("name", {
@@ -21,23 +23,6 @@ function UserForm({ register, errors }) {
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
       </div>
 
-      <div className="flex flex-col gap-5 mt-5">
-        <label className="font-normal text-2xl" htmlFor="name">
-          Contraseña
-        </label>
-        <input
-          id="price"
-          type="password"
-          placeholder="Nombre de la tarea"
-          className="w-full p-3  border-gray-300 border"
-          {...register("password", {
-            required: "El nombre de la tarea es obligatorio",
-          })}
-        />
-        {errors.passwored && (
-          <ErrorMessage>{errors.passwored.message}</ErrorMessage>
-        )}
-      </div>
 
       <div className="flex flex-col gap-5 mt-5">
         <select
@@ -47,7 +32,7 @@ function UserForm({ register, errors }) {
             required: "La categoria de la tarea es obligatorio",
           })}
         >
-          <option value="">Seleccione un rol</option>
+          <option value="">Eleguir un role</option>
           {role.map((item) => (
             <option key={item._id} value={item.name}>
               {item.name}
