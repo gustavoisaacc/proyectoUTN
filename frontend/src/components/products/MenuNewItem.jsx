@@ -15,7 +15,7 @@ function MenuNewItem({ name, item, path, path1 }) {
         </MenuButton>
         <MenuItems anchor="bottom" className=" px-1">
           <MenuItem className="block data-[focus]:bg-blue-100 p-2">
-            <button onClick={() => navigate(`?${path1}=true`)}>
+            <button onClick={() => navigate(`?${path1}=true&id=1`)}>
               Nuevo {name}
             </button>
           </MenuItem>

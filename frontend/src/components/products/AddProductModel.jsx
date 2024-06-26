@@ -22,8 +22,15 @@ export default function AddProductModal() {
   const location = useLocation();
   const queyParam = new URLSearchParams(location.search);
   const query = queyParam.get("newproduct");
-  const show = query ? true : false;
 
+  const show = query ? true : false;
+  const paramsObject = {};
+
+  queyParam.forEach((value, key) => {
+    paramsObject[key] = value;
+  });
+
+  console.log(paramsObject);
   const initialValue = {
     name: "",
     price: "",
