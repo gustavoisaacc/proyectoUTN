@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Roles } from "../models/role.model.js";
 import { Users } from "../models/user.model.js";
 import { hash } from "../utils/encryptPassword.js";
@@ -18,7 +17,7 @@ export const create = async (req, res, next) => {
     next(error);
   }
   await newUser.save();
-  res.status(201).json({ msg: "usuario creado", newUser });
+  res.status(201).json({ msg: "usuario creado" });
 };
 
 export const findAll = async (req, res) => {
@@ -26,10 +25,11 @@ export const findAll = async (req, res) => {
   res.status(200).json(user);
 };
 
-export const findById = async(req, res) => {
- 
-  console.log(req.params.id)
-  const user = await Users.findById(req.params.id);
+export const findById = async (req, res) => {
+  console.log(req.params.id);
+  const user = await Users.findById(req.params.id, { password: 0 }).populate(
+    "role"
+  );
   res.status(200).json(user);
 };
 
@@ -46,15 +46,13 @@ export const update = async (req, res) => {
   }
   if (data.role) {
     const foundRole = await Roles.findOne({ name: { $in: data.role } });
-    if (!foundRole)
-      return res.status(400).json({ message: "role not found" });
-    findUser.role = Array(foundRole).map((role) => role._id);
+    if (!foundRole) return res.status(400).json({ message: "role not found" });
+    findUser.role = Array(foundRole).map((role) => role._id) || findUser.role;
+    findUser.name = data.name || findUser.name;
   }
-  findUser.name = data.name || findUser.name;
-
 
   await findUser.save();
-  res.status(200).json({ msg: "user updated successfully", findUser });
+  res.status(200).json({ msg: "user updated successfully" });
 };
 
 export const deletee = async (req, res) => {

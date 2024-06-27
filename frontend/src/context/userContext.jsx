@@ -10,6 +10,7 @@ function UserProvider(props) {
   const getUsers = async () => {
     try {
       const res = await api.get("/users");
+      setErrors(null);
       setUsers(res.data);
     } catch (error) {
       if (error.response) {
@@ -21,6 +22,7 @@ function UserProvider(props) {
     console.log("context data", data);
     try {
       const res = await api.post("/users", data);
+      setErrors(null);
       setUsers([...users, res.data]);
       return res.data;
     } catch (error) {
@@ -31,41 +33,51 @@ function UserProvider(props) {
     }
   };
 
-  const deleteUser = async ({ id }) => {
-
+  const deleteUser = async (id) => {
     try {
       const res = await api.delete(`/users/${id}`);
+
       if (res.status === 204) {
         setUsers(users.filter((item) => item.id !== id));
+        setErrors(null);
       }
     } catch (error) {
       if (error.response) {
-        setError(error.response.data)
+        setErrors(error.response.data);
       }
     }
-  }
+  };
 
   const updateUser = async (id, data) => {
-
     try {
       const res = await api.put(`/users/${id}`, data);
-      return res.data
+      setErrors(null);
+      return res.data;
     } catch (error) {
       if (error.response) {
-        setError(error.response.data)
+        setErrors(error.response.data);
       }
     }
-  }
+  };
 
   const getByIdUser = async (id) => {
-    console.log(id)
     const res = await api.get(`/users/${id}`);
-    return res.data
-  }
-
+    setErrors(null);
+    return res.data;
+  };
 
   return (
-    <UserContext.Provider value={{ getUsers, getByIdUser, createUsers, deleteUser, updateUser, users, errors }}>
+    <UserContext.Provider
+      value={{
+        getUsers,
+        getByIdUser,
+        createUsers,
+        deleteUser,
+        updateUser,
+        users,
+        errors,
+      }}
+    >
       {props.children}
     </UserContext.Provider>
   );

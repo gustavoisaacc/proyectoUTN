@@ -1,7 +1,7 @@
 import { useRole } from "../../context/useAuth";
 import { ErrorMessage } from "../ui/ErrorMessage";
 
-function UserForm({ register, errors }) {
+function UserUpdateForm({ register, errors }) {
   const { role } = useRole();
 
   return (
@@ -16,21 +16,6 @@ function UserForm({ register, errors }) {
           placeholder="Nombre de usuario"
           className="w-full p-3  border-gray-300 border"
           {...register("name", {
-            required: "El nombre de la tarea es obligatorio",
-          })}
-        />
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-      </div>
-      <div className="flex flex-col gap-5 mt-5">
-        <label className="font-normal text-2xl" htmlFor="name">
-          Contraseña
-        </label>
-        <input
-          id="password"
-          type="password"
-          placeholder="password"
-          className="w-full p-3  border-gray-300 border"
-          {...register("password", {
             required: "El nombre de la tarea es obligatorio",
           })}
         />
@@ -58,4 +43,4 @@ function UserForm({ register, errors }) {
   );
 }
 
-export default UserForm;
+export default UserUpdateForm;

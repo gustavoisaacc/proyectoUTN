@@ -3,16 +3,34 @@ import MenuNewItem from "../components/products/MenuNewItem";
 import AddProductModal from "../components/products/AddProductModel";
 import AddCategoryModal from "../components/products/AddCategoryModal";
 import ListCategory from "../components/products/ListCategory";
-import { useProduct } from "../context/useAuth";
-import AddUpdateSModal from "../components/products/AddUpdateModal";
+import { useCategory, useProduct } from "../context/useAuth";
+import AddUpdateModal from "../components/products/AddUpdateModal";
 import AddUpdateCategoryModal from "../components/products/AddUpdateCategoryModal";
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 
 function ProducPage() {
-  const {msg, error} = useProduct()
- console.log(msg)
- console.log(error)
+  const { products, getProducts } = useProduct();
+  const { categories, getCategories } = useCategory();
+
+  useEffect(() => {
+    getProducts();
+    getCategories();
+  }, []);
   return (
     <div className="w-[95%] m-auto my-10">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <MenuNewItem
         name="Producto"
         item="Categoria"
@@ -20,13 +38,13 @@ function ProducPage() {
         path1="newproduct"
       />
       <div className="md:flex gap-5">
-        <ListProduct />
-        <ListCategory />
+        <ListProduct products={products} />
+        <ListCategory categories={categories} />
       </div>
       <AddProductModal />
       <AddCategoryModal />
-      <AddUpdateSModal/>
-      <AddUpdateCategoryModal/>
+      <AddUpdateModal />
+      <AddUpdateCategoryModal />
     </div>
   );
 }

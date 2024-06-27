@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -12,37 +12,56 @@ import {
 
 import { useProduct } from "../../context/useAuth";
 import ProductForm from "./ProducForm";
+import { toast } from "react-toastify";
 
-export default function AddUpdateSModal() {
+export default function AddUpdateModal() {
   //hook para crear producto
-  const { createProduct, errors: producError } = useProduct();
-
-  // //obteniendo si el modal exite
-  const navitage = useNavigate();
-  const location = useLocation();
-  const queyParam = new URLSearchParams(location.search);
-  const query = queyParam.get("updateProduct");
-  const show = query ? true : false;
-
-  const initialValue = {
-    name: "",
-    price: "",
-    category: "",
-    description: "",
-  };
+  const { getByIdProduct, updateProduct, errors: producError } = useProduct();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
+  // //obteniendo si el modal exite
+  const navitage = useNavigate();
+  const location = useLocation();
+  const queyParam = new URLSearchParams(location.search);
+  const query = queyParam.get("updateproduct");
+  const show = query ? true : false;
+
+  const paramsObject = {};
+
+  queyParam.forEach((value, key) => {
+    paramsObject[key] = value;
+  });
+
+  const { id } = paramsObject;
+
+  useEffect(() => {
+    getByIdProduct(id)
+      .then((res) => {
+        setValue("name", res.name);
+        setValue("price", res.price);
+        setValue(
+          "category",
+          res.category.map((item) => item.name)
+        );
+        setValue("description", res.description);
+      })
+      .catch((error) => console.log("produxto update", error));
+  }, [id]);
 
   const onSubmit = handleSubmit(async (data) => {
-    await createProduct(data);
-    navitage("/dashboard");
-    reset(initialValue);
+    const res = await updateProduct(id, data);
+    toast.success(res.msg);
+    getByIdProduct();
+    reset();
+    navitage(location.pathname);
   });
+
   if (producError) {
     return <h1>producError.msg</h1>;
   }

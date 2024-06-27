@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -10,46 +10,54 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-import UserForm from "./UserForm";
 import { useUsers } from "../../context/useAuth";
+import UserUpdateForm from "./UseUpdateForm";
+import { toast } from "react-toastify";
 
 function AddUpdateUserModal() {
   //hook para crear user
-  const { createUsers, getByIdUser,updateUser } = useUsers();
-  const [values, setValues] = useState([])
-
-  // //obteniendo si el modal exite
-  const navitage = useNavigate();
-  const location = useLocation();
-  const queyParam = new URLSearchParams(location.search);
-  const query = queyParam.get("updateUser");
-  const show = query ? true : false;
-  const paramsObject = {};
-
-    queyParam.forEach((value, key) => {
-      paramsObject[key] = value;
-    })
-
-    const { id} = paramsObject
-   
-    useEffect(()=> {
-        getByIdUser(id).then((res)=> setValues(res)).catch(error => console.log(error))
-
-    },[id])
-  const initialValue = {
-    name: "",
-  };
-console.log(values)
+  const { getByIdUser, updateUser, getUsers } = useUsers();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
 
+  // //obteniendo si el modal exite
+  const navitage = useNavigate();
+  const location = useLocation();
+  const queyParam = new URLSearchParams(location.search);
+  const query = queyParam.get("updateuser");
+  const show = query ? true : false;
+  const paramsObject = {};
+
+  queyParam.forEach((value, key) => {
+    paramsObject[key] = value;
+  });
+
+  const { id } = paramsObject;
+
+  useEffect(() => {
+    getByIdUser(id)
+      .then((res) => {
+        setValue("name", res.name);
+        setValue(
+          "role",
+          res.role.map((item) => item.name)
+        );
+      })
+      .catch((error) => console.log(error));
+  }, [id]);
+
   const onSubmit = handleSubmit(async (data) => {
-    navitage("/dashboard");
-    reset(initialValue);
+    console.log(id);
+    const res = await updateUser(id, data);
+    toast.success(res.msg);
+    getUsers();
+    reset();
+    navitage(location.pathname);
   });
 
   return (
@@ -86,14 +94,14 @@ console.log(values)
               >
                 <DialogPanel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
                   <DialogTitle as="h3" className="font-black text-4xl  my-5">
-                    Crear Usuario
+                    Actualizar Usuario
                   </DialogTitle>
 
                   <form
                     onSubmit={onSubmit}
                     className=" mt-10 bg-white shadow-lg p-10 round-lg "
                   >
-                    <UserForm register={register} errors={errors} values={values} />
+                    <UserUpdateForm register={register} errors={errors} />
                     <input
                       type="submit"
                       value="Enviar"

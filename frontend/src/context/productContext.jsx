@@ -8,7 +8,6 @@ export function ProductProvider(props) {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
   const [error, setError] = useState(null);
-  const [msg, setMsg] = useState(null)
 
   const getProducts = async () => {
     try {
@@ -47,36 +46,38 @@ export function ProductProvider(props) {
     }
   };
 
-  const deleteProduct = async ({id}) => {
-   
+  const deleteProduct = async ({ id }) => {
     try {
       const res = await api.delete(`/product/${id}`);
-    if (res.status === 204) {
-      setProducts(products.filter((item) => item.id !== id));
-    }
+      setError(null);
+
+      if (res.status === 204) {
+        setProducts(products.filter((item) => item.id !== id));
+      }
     } catch (error) {
-      if(error.response){
-        setError(error.response.data)
+      if (error.response) {
+        setError(error.response.data);
       }
     }
-  }
+  };
 
   const updateProduct = async (id, data) => {
-   
+    console.log(id);
     try {
       const res = await api.put(`/product/${id}`, data);
-      return res.data
+      setError(null);
+      return res.data;
     } catch (error) {
-      if(error.response){
-        setError(error.response.data)
+      if (error.response) {
+        setError(error.response.data);
       }
     }
-  }
+  };
 
-  const getByIdProduct = async ({ id }) => {
+  const getByIdProduct = async (id) => {
     const res = await api.get(`/product/${id}`);
-    return res.data
-  }
+    return res.data;
+  };
 
   return (
     <ProductContext.Provider
@@ -89,7 +90,6 @@ export function ProductProvider(props) {
         filteredProducts,
         deleteProduct,
         updateProduct,
-        msg,
         error,
       }}
     >

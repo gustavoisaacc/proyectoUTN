@@ -1,15 +1,7 @@
 import Li from "../ui/Li";
-
-import { useProduct } from "../../context/useAuth";
-import { useEffect } from "react";
 import BtnIcono from "../ui/btnIcono";
 
-function ListProduct() {
-  const { products, getProducts } = useProduct();
-  useEffect(() => {
-    getProducts();
-  }, []);
-
+function ListProduct({ products }) {
   return (
     <>
       <ul className="w-full border rounded-md">
@@ -36,7 +28,7 @@ function ListProduct() {
                 </span>
                 <span>{item.price}</span>
                 <span>
-                  <BtnIcono id={item._id}/>
+                  <BtnIcono id={item._id} />
                 </span>
               </Li>
             );

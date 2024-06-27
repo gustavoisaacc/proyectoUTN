@@ -12,10 +12,11 @@ import {
 
 import UserForm from "./UserForm";
 import { useUsers } from "../../context/useAuth";
+import { toast } from "react-toastify";
 
 function AddUserModal() {
   //hook para crear user
-  const { createUsers } = useUsers();
+  const { getUsers, createUsers, errors: userError } = useUsers();
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -36,8 +37,10 @@ function AddUserModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    await createUsers(data);
-    navitage("/dashboard");
+    const res = await createUsers(data);
+    toast.success(res.msg);
+    getUsers();
+    navitage(location.pathname);
     reset(initialValue);
   });
 
@@ -78,6 +81,19 @@ function AddUserModal() {
                     Crear Usuario
                   </DialogTitle>
 
+                  {userError
+                    ? userError.map((item) => {
+                        return (
+                          <div
+                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-2"
+                            role="alert"
+                            key={item.issue}
+                          >
+                            <p>{item.issue}</p>
+                          </div>
+                        );
+                      })
+                    : null}
                   <form
                     onSubmit={onSubmit}
                     className=" mt-10 bg-white shadow-lg p-10 round-lg "

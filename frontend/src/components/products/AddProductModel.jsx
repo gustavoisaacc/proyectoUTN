@@ -12,10 +12,11 @@ import {
 
 import { useProduct } from "../../context/useAuth";
 import ProductForm from "./ProducForm";
+import { toast } from "react-toastify";
 
 export default function AddProductModal() {
   //hook para crear producto
-  const { createProduct, errors: producError } = useProduct();
+  const { getProducts, createProduct, errors: producError } = useProduct();
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -24,19 +25,6 @@ export default function AddProductModal() {
   const query = queyParam.get("newproduct");
 
   const show = query ? true : false;
-  const paramsObject = {};
-
-  queyParam.forEach((value, key) => {
-    paramsObject[key] = value;
-  });
-
-  console.log(paramsObject);
-  const initialValue = {
-    name: "",
-    price: "",
-    category: "",
-    description: "",
-  };
 
   const {
     register,
@@ -46,9 +34,11 @@ export default function AddProductModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    await createProduct(data);
-    navitage("/dashboard");
-    reset(initialValue);
+    const res = await createProduct(data);
+    toast.success(res.msg);
+    navitage(location.pathname);
+    getProducts();
+    reset();
   });
   if (producError) {
     return <h1>producError.msg</h1>;

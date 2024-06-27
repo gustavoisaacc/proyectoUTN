@@ -16,9 +16,9 @@ export const create = async (req, res) => {
     }
     newProduct.category = foundCategory._id;
   }
-
+  console.log(data);
   await newProduct.save();
-  res.status(201).json({ msg: "Product create successfully ", newProduct });
+  res.status(201).json({ msg: "Product create successfully " });
 };
 
 export const findAll = async (req, res) => {
@@ -28,7 +28,7 @@ export const findAll = async (req, res) => {
 
 export const findOne = async (req, res) => {
   const { id } = req.params;
-  const product = await Products.findById(id);
+  const product = await Products.findById(id).populate("category");
   res.status(200).json(product);
 };
 
@@ -55,14 +55,13 @@ export const findFilter = async (req, res) => {
 };
 
 export const update = async (req, res) => {
-  const { id } = req.params;
   const data = req.body;
-  const product = await Products.findById(id);
-
+  const product = await Products.findById(req.params.id);
   if (!product) {
     const error = new Error("Product not found");
     return res.status(404).json({ msg: error.message });
   }
+  console.log(product);
   if (data.category) {
     const foundCategory = await Categories.findOne({
       name: { $in: data.category },
@@ -71,11 +70,13 @@ export const update = async (req, res) => {
       const error = new Error("Category not found");
       return res.status(404).json({ msg: error.message });
     }
-    newProduct.category = foundCategory._id;
+    product.category = foundCategory._id;
   }
-
+  product.name = data.name || product.name;
+  product.price = data.price || product.price;
+  product.description = data.description || product.description;
   await product.save();
-  res.status(200).json({ msg: "Product update successfully ", product });
+  res.status(200).json({ msg: "Product update successfully " });
 };
 
 export const deleteOne = async (req, res) => {

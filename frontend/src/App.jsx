@@ -12,25 +12,30 @@ import AboutUs from "./pages/AboutUs";
 import { useAuth } from "./context/useAuth";
 
 import UserPage from "./pages/UserPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { isAuth } = useAuth();
 
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/menu" element={<MenuLista />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-      </Route>
-      <Route element={<DashboarLayout isAllow={isAuth} redirectTo="/signin" />}>
-        <Route path="/dashboard" element={<DashoardPage />} />
-        <Route path="/products" element={<ProducPage />} />
-        <Route path="/user" element={<UserPage />} />
-      </Route>
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/menu" element={<MenuLista />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+        </Route>
+        <Route
+          element={<DashboarLayout isAllow={isAuth} redirectTo="/signin" />}
+        >
+          <Route path="/dashboard" element={<DashoardPage />} />
+          <Route path="/products" element={<ProducPage />} />
+          <Route path="/user" element={<UserPage />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 

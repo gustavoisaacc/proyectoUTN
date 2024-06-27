@@ -4,16 +4,12 @@ import { isAuth, superadmin } from "../middleware/validate.middleware.js";
 
 export const routeCategory = Router();
 
-routeCategory.post("/", [isAuth, superadmin], categoryController.create);
+routeCategory.post("/", categoryController.create);
 
-routeCategory.get("/", [isAuth, superadmin], categoryController.findAll);
+routeCategory.get("/", categoryController.findAll);
 
-routeCategory.get("/:id", [isAuth, superadmin], categoryController.findOne);
+routeCategory.get("/:id", categoryController.findOne);
 
-routeCategory.put("/:id", [isAuth, superadmin], categoryController.create);
+routeCategory.put("/:id", categoryController.update);
 
-routeCategory.delete(
-  "/:id",
-  [isAuth, superadmin],
-  categoryController.deleteOne
-);
+routeCategory.delete("/:id", categoryController.deleteOne);

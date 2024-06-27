@@ -10,11 +10,12 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { useCategory } from "../../context/useAuth";
+import { toast } from "react-toastify";
 
 function AddCategoryModal() {
   //hook para crear category
 
-  const { crearCategory } = useCategory();
+  const { crearCategory, getCategories } = useCategory();
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -35,8 +36,10 @@ function AddCategoryModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    await crearCategory(data);
-    navitage("/dashboard");
+    const rest = await crearCategory(data);
+    toast.success(rest.msg);
+    navitage(location.pathname);
+    getCategories();
     reset(initialValue);
   });
 

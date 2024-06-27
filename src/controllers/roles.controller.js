@@ -4,7 +4,7 @@ export const create = async (req, res) => {
   const data = req.body;
   const newRole = new Roles(data);
   newRole.save();
-  res.status(201).json({ msg: "Role create successfully ", newRole });
+  res.status(201).json({ msg: "Role create successfully " });
 };
 
 export const findAll = async (req, res) => {

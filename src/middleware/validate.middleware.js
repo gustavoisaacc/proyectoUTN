@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
 import { SECURITY_KEY } from "../config/config.js";
-import { Users } from "../models/user.model.js";
 import { Roles } from "../models/role.model.js";
 
 import mongoose from "mongoose";
@@ -55,5 +54,3 @@ export const superadmin = async (req, res, next) => {
   }
   next();
 };
-
-

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -10,36 +10,50 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { useCategory } from "../../context/useAuth";
+import { toast } from "react-toastify";
 
 function AddUpdateCategoryModal() {
   //hook para crear category
 
-  const { crearCategory } = useCategory();
-
-  // //obteniendo si el modal exite
-  const navitage = useNavigate();
-  const location = useLocation();
-  const queyParam = new URLSearchParams(location.search);
-  const query = queyParam.get("updateCategory");
-  const show = query ? true : false;
-
-  const initialValue = {
-    name: "",
-  };
-
+  const { updateCategory, getByIdCategory, getCategories } = useCategory();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await crearCategory(data);
-    navitage("/dashboard");
-    reset(initialValue);
+  // //obteniendo si el modal exite
+  const navitage = useNavigate();
+  const location = useLocation();
+  const queyParam = new URLSearchParams(location.search);
+  const query = queyParam.get("updatecategories");
+  const show = query ? true : false;
+
+  const paramsObject = {};
+
+  queyParam.forEach((value, key) => {
+    paramsObject[key] = value;
   });
 
+  const { id } = paramsObject;
+
+  useEffect(() => {
+    getByIdCategory(id)
+      .then((res) => {
+        setValue("name", res.name);
+      })
+      .catch((error) => console.log(error));
+  }, [id]);
+
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await updateCategory(id, data);
+    toast.success(res.msg);
+    navitage(location.pathname);
+    getCategories();
+    reset();
+  });
   return (
     <>
       <Transition appear show={show} as={Fragment}>

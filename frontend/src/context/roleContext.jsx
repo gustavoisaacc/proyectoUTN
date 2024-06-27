@@ -29,34 +29,48 @@ function RoleProvider(props) {
     }
   };
 
-  const deleteRol = async ({id}) => {
-   
+  const deleteRol = async ({ id }) => {
     try {
       const res = await api.delete(`/role/${id}`);
-    if (res.status === 204) {
-      setRole(role.filter((item) => item.id !== id));
-    }
+      if (res.status === 204) {
+        setRole(role.filter((item) => item.id !== id));
+      }
     } catch (error) {
-      if(error.response){
-        setError(error.response.data)
+      if (error.response) {
+        setError(error.response.data);
       }
     }
-  }
+  };
 
   const updateRol = async (id, data) => {
-   
     try {
       const res = await api.put(`/role/${id}`, data);
-      return res.data
+      return res.data;
     } catch (error) {
-      if(error.response){
-        setError(error.response.data)
+      if (error.response) {
+        setError(error.response.data);
       }
     }
-  }
+  };
+
+  const getByIdRol = async (id) => {
+    const res = await api.get(`/role/${id}`);
+    console.log(res.data);
+    return res.data;
+  };
 
   return (
-    <RoleContext.Provider value={{ getRole, createRole, deleteRol, updateRol, role, error }}>
+    <RoleContext.Provider
+      value={{
+        getRole,
+        createRole,
+        deleteRol,
+        updateRol,
+        getByIdRol,
+        role,
+        error,
+      }}
+    >
       {props.children}
     </RoleContext.Provider>
   );

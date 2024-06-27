@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const userSchema = z.object({
-  name: z.string().min(4),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
+  name: z.string().min(4, "El usuario debe contener 4 caracteres o mas"),
+  password: z.string().min(6, "La contraseña debe contener 6 carcteres"),
   role: z.string(),
 });
 

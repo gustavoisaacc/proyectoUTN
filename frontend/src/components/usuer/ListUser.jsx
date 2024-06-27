@@ -1,14 +1,7 @@
-import { useEffect } from "react";
-import { useUsers } from "../../context/useAuth";
 import Li from "../ui/Li";
 import BtnUser from "../ui/btnUser";
 
-function ListUser() {
-  const { users, getUsers } = useUsers();
-  useEffect(() => {
-    getUsers();
-  }, []);
-
+function ListUser({ users }) {
   return (
     <ul className="w-full border rounded-md">
       <h1 className=" font-semibold border-b-2 text-center p-5 ">Usuarios</h1>
@@ -29,7 +22,9 @@ function ListUser() {
                   ? item.role.map((item) => item.name)
                   : "no hay role"}
               </span>
-              <button><BtnUser id={item._id}/></button>
+              <button>
+                <BtnUser id={item._id} />
+              </button>
             </Li>
           );
         })
