@@ -48,3 +48,9 @@ export const createorder = async (req, res) => {
     res.status(400).send(err.message);
   }
 };
+
+export const getAllOrder = async (req, res) => {
+  const order = await Orders.find();
+  console.log(order);
+  res.status(200).json(order);
+};

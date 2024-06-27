@@ -8,8 +8,16 @@ import {
   FiDollarSign,
   FiCreditCard,
 } from "react-icons/fi";
+import { useOrder } from "../context/useAuth";
+import { useEffect } from "react";
 
 function DashoardPage() {
+  const { orders, getOrder } = useOrder();
+
+  useEffect(() => {
+    getOrder();
+  }, []);
+  console.log(orders);
   return (
     <>
       <div className="w-[95%] m-auto">

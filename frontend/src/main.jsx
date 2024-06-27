@@ -10,6 +10,7 @@ import { ProductProvider } from "./context/productContext.jsx";
 import CategoryProvider from "./context/categoryContext.jsx";
 import UserProvider from "./context/userContext.jsx";
 import RoleProvider from "./context/roleContext.jsx";
+import { OrderProvider } from "./context/oredContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <CategoryProvider>
             <UserProvider>
               <RoleProvider>
-                <App />
+                <OrderProvider>
+                  <App />
+                </OrderProvider>
               </RoleProvider>
             </UserProvider>
           </CategoryProvider>
