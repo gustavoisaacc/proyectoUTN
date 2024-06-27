@@ -79,6 +79,7 @@ export function ProductProvider(props) {
     return res.data;
   };
 
+
   return (
     <ProductContext.Provider
       value={{
@@ -91,6 +92,8 @@ export function ProductProvider(props) {
         deleteProduct,
         updateProduct,
         error,
+        car,
+        agregarcar
       }}
     >
       {props.children}

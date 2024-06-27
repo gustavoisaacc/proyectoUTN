@@ -2,7 +2,9 @@ import { useState } from "react";
 import "../menuBurger/menuBurger.css";
 import { PROTECTEDROUTES, navegacion } from "../../utils/navegacion";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/useAuth";
+import { useAuth, useProduct } from "../../context/useAuth";
+
+// import ShoppingCart from "../carrito/cart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +14,7 @@ const Navbar = () => {
     <div className="nadvar text-white p-5 w-[95%] m-auto">
       <div className="nav-logo">coode</div>
       <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
+      
         {!isAuth ? (
           navegacion.map((item) => {
             return (
