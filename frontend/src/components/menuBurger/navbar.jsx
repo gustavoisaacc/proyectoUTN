@@ -3,17 +3,19 @@ import "../menuBurger/menuBurger.css";
 import { PROTECTEDROUTES, navegacion } from "../../utils/navegacion";
 import { Link } from "react-router-dom";
 import { useAuth, useProduct } from "../../context/useAuth";
-
-// import ShoppingCart from "../carrito/cart";
+import ShoppingCart from "../carrito/shopingCart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuth, signout } = useAuth();
 
   return (
+    
     <div className="nadvar text-white p-5 w-[95%] m-auto">
       <div className="nav-logo">coode</div>
       <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
+      <ShoppingCart/>
+      
       
         {!isAuth ? (
           navegacion.map((item) => {

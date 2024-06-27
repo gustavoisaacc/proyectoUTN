@@ -92,8 +92,6 @@ export function ProductProvider(props) {
         deleteProduct,
         updateProduct,
         error,
-        car,
-        agregarcar
       }}
     >
       {props.children}
