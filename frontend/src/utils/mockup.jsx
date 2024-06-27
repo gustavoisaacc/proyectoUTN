@@ -8,7 +8,7 @@ export const products = [
     category: "category 1",
     price: 100,
     image:
-      "https://cdn.pixabay.com/photo/2017/04/23/09/03/hamburger-2253349_1280.jpg",
+      "https://th.bing.com/th/id/OIP.KRReSFSoLHK7kpAMBRxffwHaHa?rs=1&pid=ImgDetMain",
   },
   {
     id: 2,
@@ -16,10 +16,8 @@ export const products = [
     description:
       "lorem ipsum dolor sit amet, consectetur adip, lorem ipsum dolor, lorem ",
     status: true,
-    category: "category 2",
-    price: 200,
     image:
-      "https://cdn.pixabay.com/photo/2017/02/03/03/54/burger-2034433_1280.jpg",
+      "https://cdn-icons-png.flaticon.com/512/1046/1046786.png",
   },
   {
     id: 3,
@@ -27,21 +25,17 @@ export const products = [
     description:
       "lorem ipsum dolor sit amet, consectetur adip, lorem ipsum dolor, lorem ",
     status: true,
-    category: "category 3",
-    price: 300,
     image:
-      "https://cdn.pixabay.com/photo/2017/06/29/20/16/food-2456100_1280.jpg",
+      "https://th.bing.com/th/id/OIP.UyAvwxCrrTl-M18zYWXHcAAAAA?rs=1&pid=ImgDetMain",
   },
   {
     id: 4,
-    title: "Product 3",
+    title: "PIZZA",
     description:
       "lorem ipsum dolor sit amet, consectetur adip, lorem ipsum dolor, lorem ",
     status: true,
-    category: "category 3",
-    price: 300,
     image:
-      "https://cdn.pixabay.com/photo/2017/06/29/20/16/food-2456100_1280.jpg",
+      "https://th.bing.com/th/id/R.a75ab3af53a590951ceb57c2f2dbb96e?rik=iWSfA9bIGi7Y9g&pid=ImgRaw&r=0",
   },
 ];
 
