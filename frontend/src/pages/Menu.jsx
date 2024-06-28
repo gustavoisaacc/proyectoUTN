@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MenuCardsOrden from "../components/menuCardsOrden";
 import BtnMenuLista from "../components/ui/btnMenuLista";
 import { useProduct } from "../context/useAuth";
+import AddPagoModal from "../components/carrito/AddPagoModal";
 
 const MenuLista = () => {
   const { filteredProducts, filter, getProducts, error } = useProduct();
+
+  const [count, setCount] = useState(1);
+
   useEffect(() => {
     getProducts();
     filteredProducts();
@@ -21,11 +25,19 @@ const MenuLista = () => {
             </p>
           ) : (
             filter.map((items) => {
-              return <MenuCardsOrden key={items.id} items={items} />;
+              return (
+                <MenuCardsOrden
+                  key={items.id}
+                  items={items}
+                  count={count}
+                  setCount={setCount}
+                />
+              );
             })
           )}
         </div>
       </div>
+      <AddPagoModal />
     </>
   );
 };

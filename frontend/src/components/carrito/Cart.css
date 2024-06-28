@@ -6,6 +6,7 @@
     right: 0px;
     top: 0px;
     width: 200px;
+    z-index: 1;
   }
   
   .cart img {
@@ -43,7 +44,7 @@
     top: 8px;
     transition: all .3s ease;
     width: 32px;
-    z-index: 9999;
+    z-index: 0;
   }
   
   .cart-button:hover {

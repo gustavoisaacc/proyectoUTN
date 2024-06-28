@@ -1,16 +1,12 @@
+import { useCar } from "../context/useAuth";
 import CounterButton from "./ui/botonContador";
-import { useProduct } from "../context/useAuth";
-import { useState } from "react";
 
+const MenuCardsOrden = ({ items, count, setCount }) => {
+  const { addToCart } = useCar();
+  const handleCar = async () => {
+    addToCart(items);
+  };
 
-const MenuCardsOrden = ({ items }) => {
-//   const { car,agregarcar, getByIdProduct } = useProduct()
-//   const handleCar = async (id) => {
-//     const e = await getByIdProduct(id)
-//     agregarcar(e)
-//   console.log(car)
-
-//   }
   return (
     <div className={`bg-white rounded-lg shadow-md p-4 `}>
       <img
@@ -26,11 +22,12 @@ const MenuCardsOrden = ({ items }) => {
         </div>
         <div className="flex justify-center flex-col">
           <button
-            // onClick={() => handleCar(items._id)}
-            className="border-2 border-primary bg-primary text-white px-3 py-1 rounded-2xl my-2">
+            onClick={() => handleCar(items._id)}
+            className="border-2 border-primary bg-primary text-white px-3 py-1 rounded-2xl my-2"
+          >
             AGREGAR
           </button>
-          <CounterButton />
+          <CounterButton count={count} setCount={setCount} />
         </div>
       </div>
     </div>

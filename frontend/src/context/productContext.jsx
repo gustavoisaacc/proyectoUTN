@@ -37,7 +37,6 @@ export function ProductProvider(props) {
       const res = await api.get(`/product/filter?product=${filter}`);
       setError(null);
       setFilter(res.data);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       if (error.response) {
@@ -78,7 +77,6 @@ export function ProductProvider(props) {
     const res = await api.get(`/product/${id}`);
     return res.data;
   };
-
 
   return (
     <ProductContext.Provider
