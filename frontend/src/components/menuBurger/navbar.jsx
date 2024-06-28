@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 import ShoppingCart from "../carrito/shopingCart";
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuth, signout } = useAuth();
@@ -13,6 +14,7 @@ const Navbar = () => {
     <div className="nadvar text-white p-5 w-[95%] m-auto">
       <div className="nav-logo">coode</div>
       <div className={`nav-item ${isOpen && "open"} flex gap-5 `}>
+       
         {!isAuth ? (
           <div className="flex">
             <ShoppingCart />
@@ -36,13 +38,14 @@ const Navbar = () => {
               );
             })}
             <button onClick={() => signout()}>logout</button>
+            
           </div>
         )}
       </div>
       <div
         className={`nav-toggle ${isOpen && "open"}`}
         onClick={() => setIsOpen((state) => !state)}
-      >
+      > 
         <span></span>
         <span></span>
         <span></span>

@@ -34,8 +34,8 @@ function ProducPage() {
       <MenuNewItem
         name="Producto"
         item="Categoria"
-        path="newcategory"
-        path1="newproduct"
+        path="Nueva Categoria"
+        path1="Nuevo Producto"
       />
       <div className="md:flex gap-5">
         <ListProduct products={products} />
