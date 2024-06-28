@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { api } from "../libs/axios";
 
 // Crear el contexto
 export const CartContext = createContext();
@@ -45,9 +46,25 @@ export const CartProvider = ({ children }) => {
   const getTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
+
+  const createOrder = async (data) => {
+    const order = await api("/order", data);
+    console.log(order);
+    // Borrar el carrito después de la compra
+    setCart([]);
+    setCount(0);
+  };
+
   return (
     <CartContext.Provider
-      value={{ handleRemoveFromCart, cart, addToCart, count, getTotal }}
+      value={{
+        handleRemoveFromCart,
+        createOrder,
+        cart,
+        addToCart,
+        count,
+        getTotal,
+      }}
     >
       {children}
     </CartContext.Provider>

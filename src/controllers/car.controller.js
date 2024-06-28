@@ -23,30 +23,8 @@ export const crearItems = async (req, res) => {
 };
 
 export const createorder = async (req, res) => {
-  const { items, user } = req.body;
-  let totalF = 0;
-  let orderNumber = 1;
-
-  try {
-    // Calcular el total de la orden
-    const amount = await Orders.find();
-    for (const orderItem of items) {
-      const id = new mongoose.Types.ObjectId(orderItem);
-      const item = await ProductItems.findById(id);
-      if (!item) {
-        return res.status(404).send(`Item with ID ${id} not found`);
-      }
-      totalF += item.total;
-    }
-    orderNumber += amount.length;
-    let total = totalF;
-
-    const order = new Orders({ orderId: items, total, user, orderNumber });
-    await order.save();
-    res.status(201).send(order);
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
+  const data = req.body;
+  console.log(data);
 };
 
 export const getAllOrder = async (req, res) => {

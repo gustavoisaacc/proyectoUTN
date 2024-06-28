@@ -11,9 +11,11 @@ import {
 } from "@headlessui/react";
 
 import PagoForm from "./PagoForm";
+import { useCar } from "../../context/useAuth";
 
 export default function AddPagoModal() {
-  //hook para crear producto
+  //hook para crear order
+  const { cart, createOrder, getTotal } = useCar();
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -31,8 +33,13 @@ export default function AddPagoModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    navitage(location.pathname);
-
+    const d = {
+      user: data.name,
+      cart,
+      total: getTotal(),
+    };
+    await createOrder(d);
+    navitage(`/`);
     reset();
   });
 
