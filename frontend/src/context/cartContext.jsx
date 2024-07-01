@@ -92,6 +92,17 @@ export const CartProvider = ({ children }) => {
       }
     }
   };
+  const getOrderById = async (id) => {
+    console.log(id);
+    try {
+      const res = await api.get(`/order/${id}`);
+      return res.data;
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
+  };
 
   return (
     <CartContext.Provider
@@ -104,6 +115,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         getTotal,
         getOrder,
+        getOrderById,
       }}
     >
       {children}

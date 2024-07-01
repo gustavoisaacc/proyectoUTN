@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import { useCar } from "../context/useAuth";
 import { useEffect } from "react";
+import SeeOrderModal from "../components/carrito/SeeOrderModal";
 
 function DashoardPage() {
   const { order, getOrder } = useCar();
@@ -58,6 +59,7 @@ function DashoardPage() {
           <OrderList order={order} />
         </main>
       </div>
+      <SeeOrderModal />
       <ToastContainer
         position="top-left"
         autoClose={5000}

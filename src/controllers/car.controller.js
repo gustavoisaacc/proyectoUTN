@@ -13,11 +13,12 @@ export const crearItems = async (req, res) => {
   products.forEach((product) => {
     total += product.price;
   });
-  orderNumber += 1;
+  const counter = await Orders.find();
+  orderNumber = counter.length + 1;
   try {
     const order = new Orders({
       user: customerInfo.user,
-      orderid: newCart.products,
+      orderid: newCart._id,
       metodo: customerInfo.metodo,
       total,
       orderNumber,
@@ -37,7 +38,8 @@ export const getAllOrder = async (req, res) => {
 
 export const getByOrder = async (req, res) => {
   const { id } = req.params;
-  const order = await Orders.findById(id);
+  console.log(req.params);
+  const order = await Orders.findById(id).populate("orderid");
 
-  res.status(200).json();
+  res.status(200).json(order);
 };

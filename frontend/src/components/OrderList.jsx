@@ -1,7 +1,10 @@
 import Li from "./ui/Li";
 import { FaRegEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function OrderList({ order }) {
+  console.log(order);
+  const navigate = useNavigate();
   return (
     <div className="">
       <div className=" overflow-hidden rounded-lg shadow-xl  p-10 border">
@@ -17,15 +20,18 @@ function OrderList({ order }) {
           </Li>
           {
             // eslint-disable-next-line array-callback-return
-            order.map((order, index) => {
+            order?.map((order, index) => {
               return (
-                <div key={order.orderId}>
+                <div key={order._id}>
                   <Li
                     className={`grid-cols-6 lg:gird-cols-4 p-2 ${
                       index % 2 === 0 ? "bg-gray-200" : "bg-white"
                     }`}
                   >
-                    <button className="mx-4">
+                    <button
+                      onClick={() => navigate(`?seeorder=true&id=${order._id}`)}
+                      className="mx-4"
+                    >
                       <FaRegEye size={20} />
                     </button>
                     <span>{order.orderNumber}</span>
