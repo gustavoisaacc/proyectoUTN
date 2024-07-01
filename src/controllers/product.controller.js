@@ -1,5 +1,6 @@
 import { Categories } from "../models/categoy.model.js";
 import { Products } from "../models/product.model.js";
+import { productUpdateSchema } from "../schemas/schema.js";
 
 export const create = async (req, res) => {
   const data = req.body;

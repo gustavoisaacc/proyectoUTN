@@ -16,9 +16,10 @@ function UserForm({ register, errors }) {
           placeholder="Nombre de usuario"
           className="w-full p-3  border-gray-300 border"
           {...register("name", {
-            required: "El nombre de la tarea es obligatorio",
+            required: "El nombre  es obligatorio",
           })}
         />
+
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
       </div>
       <div className="flex flex-col gap-5 mt-5">
@@ -31,10 +32,12 @@ function UserForm({ register, errors }) {
           placeholder="password"
           className="w-full p-3  border-gray-300 border"
           {...register("password", {
-            required: "El nombre de la tarea es obligatorio",
+            required: "La contraseña es obligatoria",
           })}
         />
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+        {errors.password && (
+          <ErrorMessage>{errors.password.message}</ErrorMessage>
+        )}
       </div>
 
       <div className="flex flex-col gap-5 mt-5">
@@ -42,7 +45,7 @@ function UserForm({ register, errors }) {
           id="role"
           className="w-full p-3  border-gray-300 border mb-5"
           {...register("role", {
-            required: "La role de la tarea es obligatorio",
+            required: "La role es obligatorio",
           })}
         >
           <option value="">Eleguir un role</option>

@@ -90,7 +90,7 @@ function AddCategoryModal() {
                       type="text"
                       placeholder="Nombre"
                       {...register("name", {
-                        required: "El nombre de la tarea es obligatorio",
+                        required: "El nombre es obligatorio",
                       })}
                     />
                     {errors.name && (

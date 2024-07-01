@@ -2,7 +2,6 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { useUsers } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const BtnUser = (id) => {
   const { deleteUser } = useUsers();

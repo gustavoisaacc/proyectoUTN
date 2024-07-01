@@ -16,7 +16,12 @@ import { toast } from "react-toastify";
 
 export default function AddUpdateModal() {
   //hook para crear producto
-  const { getByIdProduct, updateProduct, errors: producError } = useProduct();
+  const {
+    getByIdProduct,
+    getProducts,
+    updateProduct,
+    errors: producError,
+  } = useProduct();
 
   const {
     register,
@@ -24,6 +29,7 @@ export default function AddUpdateModal() {
     formState: { errors },
     reset,
     setValue,
+    setError,
   } = useForm();
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -55,11 +61,35 @@ export default function AddUpdateModal() {
   }, [id]);
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await updateProduct(id, data);
-    toast.success(res.msg);
-    getByIdProduct();
-    reset();
-    navitage(location.pathname);
+    const validData = {
+      ...data,
+      price: data.price ? parseInt(data.price, 10) : undefined, // Convertir edad a número
+    };
+    const res = await updateProduct(id, validData);
+    if (res?.error) {
+      // Manejo de errores del backend
+      const userError = res.error;
+
+      if (userError.message) {
+        setError("name", {
+          type: "manual",
+          message: "El usuario ya exite",
+        });
+      } else {
+        userError.map((item) => {
+          setError(`${item.path[0]}`, {
+            type: item.path[0],
+            message: item.issue,
+          });
+        });
+      }
+    } else {
+      // Éxito en la creación del usuario
+      toast.success(res?.msg);
+      getProducts();
+      reset();
+      navitage(location.pathname);
+    }
   });
 
   if (producError) {
@@ -110,7 +140,7 @@ export default function AddUpdateModal() {
 
                     <input
                       type="submit"
-                      value="Enviar"
+                      value="Editar Producto"
                       className="w-full bg-cyan-500 shadow-slate-300 hover:bg-cyan-600 rounded-sm px-3 py-2 text-white font-semibold text-2xl uppercase cursor-pointer transition-colors mt-2"
                     />
                   </form>

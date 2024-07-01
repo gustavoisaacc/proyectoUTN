@@ -15,8 +15,24 @@ export const categorySchema = z.object({
 });
 
 export const productSchema = z.object({
-  name: z.string().min(4),
-  price: z.number(),
+  name: z
+    .string()
+    .min(4, "El nombre del produto debe contener al menos 5 caracteres o mas"),
+  price: z.number().int(),
   category: z.string(),
   description: z.string(),
 });
+
+export const userUpdateSchema = z.object({
+  name: z
+    .string()
+    .min(4, "El nombre del produto debe contener al menos 5 caracteres o mas"),
+  price: z.number().int(),
+  category: z.string(),
+  description: z.string().optional(),
+});
+
+export const productUpdateSchema = (product) => {
+  const result = productSchema.safeParse(product);
+  return result;
+};

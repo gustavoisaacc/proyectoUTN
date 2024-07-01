@@ -9,21 +9,24 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  orderId: [
+  orderid: [
     {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ProductItems",
-      required: true,
-      quantity: Number,
     },
   ],
   orderNumber: {
     type: Number,
     required: true,
-    trim: true,
+    default: 0,
   },
   total: {
     type: Number,
+    required: true,
+    default: 0,
+  },
+  metodo: {
+    type: String,
     required: true,
   },
   status: {

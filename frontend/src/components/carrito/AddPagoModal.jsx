@@ -13,9 +13,11 @@ import {
 import PagoForm from "./PagoForm";
 import { useCar } from "../../context/useAuth";
 
+import { toast } from "react-toastify";
+
 export default function AddPagoModal() {
   //hook para crear order
-  const { cart, createOrder, getTotal } = useCar();
+  const { cart, createOrder } = useCar();
 
   // //obteniendo si el modal exite
   const navitage = useNavigate();
@@ -33,14 +35,17 @@ export default function AddPagoModal() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const d = {
-      user: data.name,
-      cart,
-      total: getTotal(),
+    const order = {
+      customerInfo: data, // Información del cliente
+      products: cart, // Productos del carrito
     };
-    await createOrder(d);
-    navitage(`/`);
-    reset();
+    const res = await createOrder(order);
+    console.log(res);
+    if (res) {
+      toast.success(res?.msg);
+      reset();
+      navitage("/menu");
+    }
   });
 
   return (

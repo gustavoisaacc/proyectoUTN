@@ -31,14 +31,39 @@ export default function AddProductModal() {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await createProduct(data);
-    toast.success(res.msg);
-    navitage(location.pathname);
-    getProducts();
-    reset();
+    const validData = {
+      ...data,
+      price: data.price ? parseInt(data.price, 10) : undefined, // Convertir edad a número
+    };
+    const res = await createProduct(validData);
+    if (res?.error) {
+      // Manejo de errores del backend
+      const userError = res.error;
+
+      if (userError.message) {
+        setError("name", {
+          type: "manual",
+          message: "El usuario ya exite",
+        });
+      } else {
+        userError.map((item) => {
+          setError(`${item.path[0]}`, {
+            type: item.path[0],
+            message: item.issue,
+          });
+        });
+      }
+    } else {
+      // Éxito en la creación del usuario
+      toast.success(res?.msg);
+      reset();
+      getProducts();
+      navitage(location.pathname);
+    }
   });
   if (producError) {
     return <h1>producError.msg</h1>;
@@ -88,7 +113,7 @@ export default function AddProductModal() {
 
                     <input
                       type="submit"
-                      value="Enviar"
+                      value="Crear Producto"
                       className="w-full bg-cyan-500 shadow-slate-300 hover:bg-cyan-600 rounded-sm px-3 py-2 text-white font-semibold text-2xl uppercase cursor-pointer transition-colors mt-2"
                     />
                   </form>

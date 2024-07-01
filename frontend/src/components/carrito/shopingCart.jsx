@@ -5,9 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart, count, getTotal } = useCar();
+  const { cart, count, getTotal, handleRemoveFromCart } = useCar();
 
   const navigation = useNavigate();
+
+  const handleDeleteCard = (id) => {
+    handleRemoveFromCart(id);
+  };
 
   return (
     <div className="relative">
@@ -28,7 +32,7 @@ const ShoppingCart = () => {
             <div className="p-4">
               {cart.map((item) => (
                 <div
-                  key={item.id}
+                  key={item._id}
                   className="flex items-center justify-between mb-4"
                 >
                   <div>
@@ -38,8 +42,14 @@ const ShoppingCart = () => {
                     </p>
                   </div>
                   <p className="text-gray-700">
-                    ${(item.price * item.quantity).toFixed(2)}$
+                    ${(item.price * item.quantity).toFixed(2)}
                   </p>
+                  <button
+                    onClick={() => handleDeleteCard(item._id)}
+                    className="text-black"
+                  >
+                    X
+                  </button>
                 </div>
               ))}
               <p className="text-gray-700 flex justify-between border-t-2 pt-2">

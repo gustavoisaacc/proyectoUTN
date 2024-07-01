@@ -101,7 +101,7 @@ function AddUpdateCategoryModal() {
                       type="text"
                       placeholder="Nombre"
                       {...register("name", {
-                        required: "El nombre de la tarea es obligatorio",
+                        required: "El nombre  es obligatorio",
                       })}
                     />
                     {errors.name && (
@@ -109,7 +109,7 @@ function AddUpdateCategoryModal() {
                     )}
                     <input
                       type="submit"
-                      value="Enviar"
+                      value="Editar Categoria"
                       className="w-full bg-cyan-500 shadow-slate-300 hover:bg-cyan-600 rounded-sm px-3 py-2 text-white font-semibold text-2xl uppercase cursor-pointer transition-colors mt-2"
                     />
                   </form>

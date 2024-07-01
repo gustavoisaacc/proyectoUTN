@@ -8,47 +8,54 @@ import {
   FiDollarSign,
   FiCreditCard,
 } from "react-icons/fi";
-import { useOrder } from "../context/useAuth";
+import { useCar } from "../context/useAuth";
 import { useEffect } from "react";
 
 function DashoardPage() {
-  const { orders, getOrder } = useOrder();
+  const { order, getOrder } = useCar();
 
   useEffect(() => {
     getOrder();
   }, []);
-  console.log(orders);
+
+  const promedio =
+    order.reduce((accumulator, current) => accumulator + current.total, 0) /
+    order.length;
+
   return (
     <>
       <div className="w-[95%] m-auto">
-        <header className="flex gap-5 my-10">
+        <header className="flex flex-col lg:flex-row gap-5 my-10 ">
           <ManagerTable
             name="Total Orders"
-            total="$200"
+            total={order.length}
             className="bg-primary "
             icon={<FiShoppingCart />}
           />
           <ManagerTable
             name="Ingresos totales"
-            total="$200"
+            total={`$${order.reduce(
+              (accumulator, current) => accumulator + current.total,
+              0
+            )}`}
             className="bg-primaryLigth "
             icon={<FiDollarSign />}
           />
           <ManagerTable
             name="Clientes totales"
-            total="$200"
+            total={order.length}
             className="bg-secundaryDark"
             icon={<FiUsers />}
           />
           <ManagerTable
             name="Promedio totales"
-            total="$200"
+            total={promedio}
             className="bg-secundary"
             icon={<FiCreditCard />}
           />
         </header>
         <main>
-          <OrderList />
+          <OrderList order={order} />
         </main>
       </div>
       <ToastContainer

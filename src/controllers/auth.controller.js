@@ -5,7 +5,7 @@ import { createAccessToken } from "../utils/jwt.js";
 
 export const sigin = async (req, res) => {
   const { name, password } = req.body;
-  const user = await Users.findOne({ name });
+  const user = await Users.findOne({ name }).populate("role");
 
   if (!user) {
     const error = new Error("check your email or password");
@@ -28,7 +28,7 @@ export const sigin = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   });
 
-  res.json({ message: "Logged in", token });
+  res.json({ message: "Logged in", token, user });
 };
 
 export const signOut = (req, res) => {

@@ -19,16 +19,25 @@ function UserProvider(props) {
     }
   };
   const createUsers = async (data) => {
-    console.log("context data", data);
     try {
       const res = await api.post("/users", data);
-      setErrors(null);
-      setUsers([...users, res.data]);
-      return res.data;
+
+      // Manejo de respuestas HTTP que no son exitosas
+      if (res.status !== 201) {
+        console.log("User creation failed with status:", res.status);
+        return null; // Devuelve null o un objeto de error
+      }
+
+      setUsers((prevUsers) => [...prevUsers, res.data]);
+      return res.data; // Devuelve los datos del usuario creado
     } catch (error) {
       if (error.response) {
         console.log("context error", error.response);
         setErrors(error.response.data);
+        return { error: error.response.data }; // Devuelve un objeto de error
+      } else {
+        console.log("Unexpected error", error);
+        return { error: "Unexpected error occurred" }; // Devuelve un mensaje de error genérico
       }
     }
   };
@@ -51,11 +60,19 @@ function UserProvider(props) {
   const updateUser = async (id, data) => {
     try {
       const res = await api.put(`/users/${id}`, data);
-      setErrors(null);
+      if (res.status !== 201) {
+        console.log("User creation failed with status:", res.status);
+        return null; // Devuelve null o un objeto de error
+      }
       return res.data;
     } catch (error) {
       if (error.response) {
+        console.log("context error", error.response);
         setErrors(error.response.data);
+        return { error: error.response.data }; // Devuelve un objeto de error
+      } else {
+        console.log("Unexpected error", error);
+        return { error: "Unexpected error occurred" }; // Devuelve un mensaje de error genérico
       }
     }
   };

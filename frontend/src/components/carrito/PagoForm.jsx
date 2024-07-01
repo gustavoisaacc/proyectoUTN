@@ -14,19 +14,19 @@ export default function PagoForm({ register, errors }) {
           type="text"
           placeholder="Nombre de la tarea"
           className="w-full p-3  border-gray-300 border"
-          {...register("name", {
-            required: "El nombre de la tarea es obligatorio",
+          {...register("user", {
+            required: "El nombre es obligatorio",
           })}
         />
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+        {errors.user && <ErrorMessage>{errors.user.message}</ErrorMessage>}
       </div>
 
       <div className="flex flex-col gap-5 mt-5">
         <select
           id="category"
           className="w-full p-3  border-gray-300 border mb-5"
-          {...register("category", {
-            required: "La categoria de la tarea es obligatorio",
+          {...register("metodo", {
+            required: "La categoria es obligatorio",
           })}
         >
           <option value="">Seleccione metodo de pago</option>
@@ -36,9 +36,7 @@ export default function PagoForm({ register, errors }) {
             </option>
           ))}
         </select>
-        {errors.category && (
-          <ErrorMessage>{errors.category.message}</ErrorMessage>
-        )}
+        {errors.metodo && <ErrorMessage>{errors.metodo.message}</ErrorMessage>}
       </div>
     </>
   );

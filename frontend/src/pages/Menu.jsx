@@ -3,6 +3,7 @@ import MenuCardsOrden from "../components/menuCardsOrden";
 import BtnMenuLista from "../components/ui/btnMenuLista";
 import { useProduct } from "../context/useAuth";
 import AddPagoModal from "../components/carrito/AddPagoModal";
+import { ToastContainer } from "react-toastify";
 
 const MenuLista = () => {
   const { filteredProducts, filter, getProducts, error } = useProduct();
@@ -38,6 +39,18 @@ const MenuLista = () => {
         </div>
       </div>
       <AddPagoModal />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

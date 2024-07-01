@@ -5,7 +5,7 @@ import {
   superadmin,
   validateData,
 } from "../middleware/validate.middleware.js";
-import { userSchema } from "../schemas/schema.js";
+import { userSchema, userUpdateSchema } from "../schemas/schema.js";
 
 export const routeUser = Router();
 
@@ -16,6 +16,6 @@ routeUser.get("/", userController.findAll);
 
 routeUser.get("/:id", userController.findById);
 
-routeUser.put("/:id", userController.update);
+routeUser.put("/:id", validateData(userUpdateSchema), userController.update);
 
 routeUser.delete("/:id", userController.deletee);

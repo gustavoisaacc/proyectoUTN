@@ -23,6 +23,7 @@ function AddUpdateUserModal() {
     formState: { errors },
     reset,
     setValue,
+    setError,
   } = useForm();
 
   // //obteniendo si el modal exite
@@ -52,12 +53,31 @@ function AddUpdateUserModal() {
   }, [id]);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(id);
     const res = await updateUser(id, data);
-    toast.success(res.msg);
-    getUsers();
-    reset();
-    navitage(location.pathname);
+    if (res?.error) {
+      // Manejo de errores del backend
+      const userError = res.error;
+
+      if (userError.message) {
+        setError("name", {
+          type: "manual",
+          message: "El usuario ya exite",
+        });
+      } else {
+        userError.map((item) => {
+          setError(`name`, {
+            type: "manual",
+            message: item.issue,
+          });
+        });
+      }
+    } else {
+      // Éxito en la creación del usuario
+      toast.success(res?.msg);
+      reset();
+      getUsers();
+      navitage(location.pathname);
+    }
   });
 
   return (

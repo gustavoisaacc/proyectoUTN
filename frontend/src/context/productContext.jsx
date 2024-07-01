@@ -27,7 +27,11 @@ export function ProductProvider(props) {
       return res.data;
     } catch (error) {
       if (error.response) {
-        setError(error.response);
+        console.log("context error", error.response);
+        return { error: error.response.data }; // Devuelve un objeto de error
+      } else {
+        console.log("Unexpected error", error);
+        return { error: "Unexpected error occurred" }; // Devuelve un mensaje de error genérico
       }
     }
   };
@@ -64,11 +68,15 @@ export function ProductProvider(props) {
     console.log(id);
     try {
       const res = await api.put(`/product/${id}`, data);
-      setError(null);
+
       return res.data;
     } catch (error) {
       if (error.response) {
-        setError(error.response.data);
+        console.log("context error", error.response);
+        return { error: error.response.data }; // Devuelve un objeto de error
+      } else {
+        console.log("Unexpected error", error);
+        return { error: "Unexpected error occurred" }; // Devuelve un mensaje de error genérico
       }
     }
   };

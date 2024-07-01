@@ -9,9 +9,17 @@ import { productSchema } from "../schemas/schema.js";
 
 export const routerProduct = Router();
 
-routerProduct.post("/", productController.create);
+routerProduct.post(
+  "/",
+  [isAuth, superadmin, validateData(productSchema)],
+  productController.create
+);
 routerProduct.get("/", productController.findAll);
 routerProduct.get("/filter", productController.findFilter);
 routerProduct.get("/:id", productController.findOne);
-routerProduct.put("/:id", productController.update);
-routerProduct.delete("/:id", productController.deleteOne);
+routerProduct.put(
+  "/:id",
+  validateData(productSchema),
+  productController.update
+);
+routerProduct.delete("/:id", [isAuth, superadmin], productController.deleteOne);

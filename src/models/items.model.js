@@ -2,22 +2,15 @@ import mongoose from "mongoose";
 
 const itemsSchema = new mongoose.Schema(
   {
-    productId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Products",
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-      trim: true,
-      default: 1,
-    },
-    total: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
+    products: [
+      {
+        _id: mongoose.Schema.Types.ObjectId,
+        name: String,
+        description: String,
+        quantity: Number,
+        price: Number,
+      },
+    ],
   },
   {
     timestamps: true,

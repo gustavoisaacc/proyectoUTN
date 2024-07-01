@@ -1,10 +1,11 @@
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { useProduct } from "../../context/useAuth";
+import { useAuth, useProduct } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const BtnIcono = (id) => {
   const { deleteProduct } = useProduct();
+  const { superAdmin } = useAuth();
   const navigate = useNavigate();
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
@@ -16,6 +17,7 @@ const BtnIcono = (id) => {
       navigate("/dashboard");
     }
   };
+  const isDesactivated = !superAdmin ? true : false;
   return (
     <>
       <div className="flex">
@@ -25,7 +27,11 @@ const BtnIcono = (id) => {
         >
           <FiEdit size={20} />
         </button>
-        <button onClick={() => handleDelete(id)} className="mx-4">
+        <button
+          disabled={isDesactivated} // solo superadmin puede eliminar productos
+          onClick={() => handleDelete(id)}
+          className="mx-4"
+        >
           <MdDelete size={20} />
         </button>
       </div>

@@ -13,10 +13,10 @@ export default function ProductForm({ register, errors }) {
         <input
           id="name"
           type="text"
-          placeholder="Nombre de la tarea"
+          placeholder="Nombre del producto"
           className="w-full p-3  border-gray-300 border"
           {...register("name", {
-            required: "El nombre de la tarea es obligatorio",
+            required: "El nombre es obligatorio",
           })}
         />
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
@@ -29,10 +29,10 @@ export default function ProductForm({ register, errors }) {
         <input
           id="price"
           type="number"
-          placeholder="Nombre de la tarea"
+          placeholder="Precio"
           className="w-full p-3  border-gray-300 border"
           {...register("price", {
-            required: "El nombre de la tarea es obligatorio",
+            required: "El precio es obligatorio",
           })}
         />
         {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
@@ -43,7 +43,7 @@ export default function ProductForm({ register, errors }) {
           id="category"
           className="w-full p-3  border-gray-300 border mb-5"
           {...register("category", {
-            required: "La categoria de la tarea es obligatorio",
+            required: "La categoria es obligatorio",
           })}
         >
           <option value="">Seleccione una categoria</option>
@@ -67,7 +67,7 @@ export default function ProductForm({ register, errors }) {
           placeholder="Descripción de la tarea"
           className="w-full p-3  border-gray-300 border"
           {...register("description", {
-            required: "La descripción de la tarea es obligatoria",
+            required: "La descripción  es obligatoria",
           })}
         />
         {errors.description && (

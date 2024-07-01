@@ -4,8 +4,9 @@ import Cookie from "js-cookie";
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null);
+  const [superAdmin, setSuperAdmin] = useState(false);
 
   const [error, setError] = useState(null);
 
@@ -15,6 +16,11 @@ function AuthProvider({ children }) {
       Cookie.set("token", res.data.token);
       setUser(res);
       setIsAuth(true);
+      console.log(res.data);
+      const isSuperAdmin = res.data.user.role.filter((item) => {
+        return item.name === "superadmin" ? true : false;
+      });
+      setSuperAdmin(isSuperAdmin);
       return res.data;
     } catch (error) {
       if (error.response.data) {
@@ -38,7 +44,9 @@ function AuthProvider({ children }) {
   }, [error]);
 
   return (
-    <AuthContext.Provider value={{ user, error, isAuth, signin, signout }}>
+    <AuthContext.Provider
+      value={{ user, error, isAuth, signin, signout, superAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );

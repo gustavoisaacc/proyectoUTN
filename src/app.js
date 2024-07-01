@@ -49,7 +49,7 @@ app.use("/api/v1/", carRouter);
 app.use((err, req, res, next) => {
   if (err.code === 11000) {
     res.status(401).json({
-      message: "Duplicate value entered for the field",
+      message: "User already exists",
     });
   } else {
     res.status(err.status || 500).json({

@@ -1,34 +1,43 @@
-import mongoose from "mongoose";
 import { ProductItems } from "../models/items.model.js";
-import { Products } from "../models/product.model.js";
 import { Orders } from "../models/order.model.js";
 
 export const crearItems = async (req, res) => {
-  const { productId, amount } = req.body;
-  console.log(productId);
-  const id = new mongoose.Types.ObjectId(productId);
-  const items = await Products.findById(id);
-  if (!items) {
-    const error = new Error("Product not found");
-    return res.status(404).json({ msg: error.message });
-  }
-  const total = items.price * amount;
-  const newItem = new ProductItems({
-    productId: id,
-    amount: amount,
-    total: total,
+  const { products, customerInfo } = req.body;
+  let total = 0;
+  let orderNumber = 0;
+  const newCart = new ProductItems({
+    products: products.map((product) => ({
+      ...product,
+    })),
   });
-  await newItem.save();
-  res.status(200).json(newItem);
-};
-
-export const createorder = async (req, res) => {
-  const data = req.body;
-  console.log(data);
+  products.forEach((product) => {
+    total += product.price;
+  });
+  orderNumber += 1;
+  try {
+    const order = new Orders({
+      user: customerInfo.user,
+      orderid: newCart.products,
+      metodo: customerInfo.metodo,
+      total,
+      orderNumber,
+    });
+    await newCart.save();
+    await order.save();
+  } catch (error) {
+    res.status(500).json({ message: "Error al guardar el carrito", error });
+  }
+  res.status(201).json({ msg: "Su Orden fue tomada exitosamnete" });
 };
 
 export const getAllOrder = async (req, res) => {
   const order = await Orders.find();
-  console.log(order);
   res.status(200).json(order);
+};
+
+export const getByOrder = async (req, res) => {
+  const { id } = req.params;
+  const order = await Orders.findById(id);
+
+  res.status(200).json();
 };
